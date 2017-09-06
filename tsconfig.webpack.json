@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "es2015",
+    "target": "ES6",
+    "module": "ES6",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -12,7 +12,7 @@
     "importHelpers": true,
     "strictNullChecks": false,
     "lib": [
-      "es2015",
+      "ES6",
       "dom"
     ],
     "baseUrl": ".",
