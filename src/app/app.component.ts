@@ -14,9 +14,9 @@ import { AppState } from './app.service';
  */
 @Component({
   selector: 'app',
-  encapsulation: ViewEncapsulation.None
-  template: ``
+  encapsulation: ViewEncapsulation.None,
+  template: `Hello world`
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   public name = 'Skyscraper';
 }

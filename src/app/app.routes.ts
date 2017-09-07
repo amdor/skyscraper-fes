@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
 import { DataResolver } from './app.resolver';
 
-export const ROUTES: Routes = [
-];
+export const ROUTES: Routes = [];
