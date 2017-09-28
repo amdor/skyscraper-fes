@@ -3,10 +3,12 @@
  */
 import {
   Component,
-  OnInit,
   ViewEncapsulation
 } from '@angular/core';
 import { AppState } from './app.service';
+
+import * as template from './app.html';
+import * as style from './app.component.scss'
 
 /**
  * App Component
@@ -15,7 +17,9 @@ import { AppState } from './app.service';
 @Component({
   selector: 'app',
   encapsulation: ViewEncapsulation.None,
-  template: `Hello world`
+  // https://medium.com/@frosty/angularjs-template-vs-templateurl-cdde055b7907
+  template: `${template}`,
+  styles: [`${style}`]
 })
 export class AppComponent {
   public name = 'Skyscraper';

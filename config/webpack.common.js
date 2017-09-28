@@ -4,6 +4,7 @@
 
 const webpack = require('webpack');
 const helpers = require('./helpers');
+var path = require('path');
 
 /**
  * Webpack Plugins
@@ -154,7 +155,7 @@ module.exports = function (options) {
         {
           test: /\.css$/,
           use: ['to-string-loader', 'css-loader'],
-          exclude: [helpers.root('src', 'styles')]
+          exclude: [helpers.root('src', 'styles'), path.resolve(__dirname, "../../node_modules/bootstrap/dist/css")]
         },
 
         /**

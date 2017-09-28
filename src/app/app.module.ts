@@ -14,15 +14,17 @@ import { ENV_PROVIDERS } from './environment';
 import { ROUTES } from './app.routes';
 // App is our top level component
 import { AppComponent } from './app.component';
+import { IndividualCarsFormComponent } from './components'
 
 import '../styles/styles.scss';
 /**
- * `AppModule` is the main entry point into Angular2's bootstraping process
+ * `AppModule` is the main entry point into Angular2's bootstrapping process
  */
 @NgModule({
   bootstrap: [ AppComponent ],
   declarations: [
-    AppComponent
+    AppComponent,
+    IndividualCarsFormComponent
   ],
   /**
    * Import Angular's modules.
