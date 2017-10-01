@@ -1,42 +1,19 @@
-import * as individualCarsForm from '../actions/individual-cars-form.actions';
+import {CarFormActions, ADD} from '../actions/individual-cars-form.actions';
 
-export interface State {
-  loading: boolean;
-  entities: { [id: string]: any };
-  result: string[];
+export interface FormState {
+  urls: string[];
 }
 
-export const initialState: State = {
-  loading: false,
-  entities: {},
-  result: []
+export const initialFormState: FormState = {
+  urls: []
 };
 
-export function reducer(state = initialState, action: individualCarsForm.Actions): State {
+export function individualCarsFormReducer(state = initialFormState, action: CarFormActions): FormState {
   switch (action.type) {
-    case individualCarsForm.LOAD: {
-      return {
-        ...state,
-        loading: true
-      }
+    case ADD: {
+      state.urls.push(action.url)
+      return state;
     }
-
-    case individualCarsForm.LOAD_SUCCESS: {
-
-      return {
-        ...state,
-        loading: false,
-      };
-    }
-
-     case individualCarsForm.LOAD_FAIL: {
-
-      return {
-        ...state,
-        loading: false,
-      };
-    }
-
     default: {
       return state;
     }

@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
-
+import { StoreModule } from '@ngrx/store';
 import { RouterModule } from '@angular/router';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,6 +15,7 @@ import { ROUTES } from './app.routes';
 // App is our top level component
 import { AppComponent } from './app.component';
 import { IndividualCarsFormComponent } from './components'
+import {individualCarsFormReducer} from './reducers/individual-cars-form.reducer'
 
 import '../styles/styles.scss';
 /**
@@ -34,7 +35,8 @@ import '../styles/styles.scss';
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    StoreModule.forRoot({ carFormStore: individualCarsFormReducer })
   ],
   /**
    * Expose our Services and Providers into Angular's dependency injection.

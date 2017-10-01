@@ -155,7 +155,7 @@ module.exports = function (options) {
         {
           test: /\.css$/,
           use: ['to-string-loader', 'css-loader'],
-          exclude: [helpers.root('src', 'styles'), path.resolve(__dirname, "../../node_modules/bootstrap/dist/css")]
+          exclude: [helpers.root('src', 'styles')],
         },
 
         /**

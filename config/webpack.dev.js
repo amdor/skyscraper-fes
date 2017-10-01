@@ -107,7 +107,7 @@ module.exports = function (options) {
         {
           test: /\.css$/,
           use: ['style-loader', 'css-loader'],
-          include: [helpers.root('src', 'styles')]
+          include: [helpers.root('src', 'styles'), path.resolve(__dirname, "../../node_modules/bootstrap/dist/css")]
         },
 
         /**

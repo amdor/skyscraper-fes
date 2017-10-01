@@ -2,3 +2,4 @@ node_modules/
 .awcache/
 .idea/
 npm-debug.log.596905768
+.vscode/settings.json
