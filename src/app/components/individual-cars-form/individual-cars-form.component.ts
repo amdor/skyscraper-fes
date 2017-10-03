@@ -5,10 +5,11 @@ import {
     Component,
     ViewEncapsulation
 } from '@angular/core';
-import {FormState} from './../../reducers/individual-cars-form.reducer'
+import { AppState } from './../../reducers'
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import {AddAction} from './../../actions/individual-cars-form.actions'
+import { Subscription } from 'rxjs/Subscription'
+import { AddAction, SetAction } from './../../actions/individual-cars-form.actions'
 
 import * as template from './individual-cars-form.component.html';
 import * as style from './individual-cars-form.component.scss'
@@ -21,18 +22,21 @@ import * as style from './individual-cars-form.component.scss'
     styles: [`${style}`]
 })
 export class IndividualCarsFormComponent {
-    savedUris: Observable<string[]>;
+    savedUris: string[];
+    subscription: Subscription;
 
-	constructor(private store: Store<FormState>) {
-		this.savedUris = store.select('urls');
+	constructor(private store: Store<AppState>) {
+		this.subscription = store.select(state => state.individualCars.urls).subscribe((urls) => {
+            this.savedUris = urls;
+        });
 	}
 
     addNewRow() {
-        
+        this.store.dispatch(new AddAction(''));
     }
 
-    addNewUrl(event: any) {
-        this.store.dispatch(new AddAction(event.target.value));
+    addNewUrl(event: any, index: number) {
+        this.store.dispatch(new SetAction(event.target.value, index));
     }
 
 }

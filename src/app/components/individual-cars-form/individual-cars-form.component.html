@@ -1,18 +1,16 @@
 <form role="form" class="form" id="postForm" action="" method="post">
-    <!--<div *ngIf="savedUris.length > 0; else inputRow">-->
-        <!--<div *ngFor="let uri of savedUris; index as $index">-->
-            <div #inputRow class="inputTextDiv form-group row" id="uriArray{{$index}}">
-                <div class="col-xs-10 col-sm-10 col-sm-10">
-                    <input id="uriInputField{{$index}}" type="url" name="carUri{{$index}}" class="form-control" placeholder="hasznaltauto.hu url"
-                           (focus)=addNewRow() (keyup)="addNewUrl($event)">
-                </div>
-                <button class="btn btn-default btn-sm col-xs-1 col-sm-1 col-md-1 form-control-static" type="button" 
-                        id="inputButtonMinus{{$index}}" *ngIf="!!$index" (click)='deleteRow($index)'>
-                        -
-                </button>
+    <div *ngFor="let uri of savedUris; index as $index">
+        <div class="inputTextDiv form-group row" id="uriArray{{$index}}">
+            <div class="col-xs-10 col-sm-10 col-sm-10">
+                <input id="uriInputField{{$index}}" type="url" name="carUri{{$index}}" class="form-control" placeholder="hasznaltauto.hu url"
+                        (focus)=addNewRow() (keyup)="addNewUrl($event, $index)">
             </div>
-        <!--</div>-->
-    <!--</div>-->
+            <button class="btn btn-default btn-sm col-xs-1 col-sm-1 col-md-1 form-control-static" type="button" 
+                    id="inputButtonMinus{{$index}}" *ngIf="!!$index" (click)='deleteRow($index)'>
+                    -
+            </button>
+        </div>
+    </div>
     <div class="row" id="sendButtonDiv">
         <div class="col-md-10">
             <input id="sendButton" class="btn btn-primary form-control" type="button" value="Elküldés">

@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 
 export const ADD =                 '[Individual Cars Form] Add';
+export const SET =                 '[Individual Cars Form] Set';
 export const REMOVE =              '[Individual Cars Form] Remove';
 
 /**
@@ -12,6 +13,12 @@ export class AddAction implements Action {
   constructor(public url: string) { }
 }
 
+export class SetAction implements Action {
+  readonly type = SET;
+
+  constructor(public url: string, public index: number) { }
+}
+
 export class RemoveAction implements Action {
   readonly type = REMOVE;
 
@@ -19,4 +26,5 @@ export class RemoveAction implements Action {
 }
 
 export type CarFormActions = AddAction
-  | RemoveAction;
+  | RemoveAction
+  | SetAction;

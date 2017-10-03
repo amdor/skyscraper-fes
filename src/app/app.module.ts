@@ -15,7 +15,7 @@ import { ROUTES } from './app.routes';
 // App is our top level component
 import { AppComponent } from './app.component';
 import { IndividualCarsFormComponent } from './components'
-import {individualCarsFormReducer} from './reducers/individual-cars-form.reducer'
+import {individualCarsFormReducer} from './reducers'
 
 import '../styles/styles.scss';
 /**
@@ -36,7 +36,7 @@ import '../styles/styles.scss';
     FormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES),
-    StoreModule.forRoot({ carFormStore: individualCarsFormReducer })
+    StoreModule.forRoot({ individualCars: individualCarsFormReducer })
   ],
   /**
    * Expose our Services and Providers into Angular's dependency injection.
