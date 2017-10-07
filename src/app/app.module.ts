@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import {HttpClientModule} from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { RouterModule } from '@angular/router';
@@ -15,7 +15,7 @@ import { ROUTES } from './app.routes';
 // App is our top level component
 import { AppComponent } from './app.component';
 import { IndividualCarsFormComponent } from './components'
-import {individualCarsFormReducer} from './reducers'
+import { individualCarsFormReducer } from './reducers'
 
 import '../styles/styles.scss';
 /**
@@ -34,7 +34,7 @@ import '../styles/styles.scss';
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     RouterModule.forRoot(ROUTES),
     StoreModule.forRoot({ individualCars: individualCarsFormReducer })
   ],

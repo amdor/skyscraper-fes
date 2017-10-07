@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { UrlFieldState } from './../reducers'
 
 export const ADD =                 '[Individual Cars Form] Add';
 export const SET =                 '[Individual Cars Form] Set';
@@ -10,13 +11,13 @@ export const REMOVE =              '[Individual Cars Form] Remove';
 export class AddAction implements Action {
   readonly type = ADD;
 
-  constructor(public url: string) { }
+  constructor() { }
 }
 
 export class SetAction implements Action {
   readonly type = SET;
 
-  constructor(public url: string, public index: number) { }
+  constructor(public url: UrlFieldState, public index: number) { }
 }
 
 export class RemoveAction implements Action {
