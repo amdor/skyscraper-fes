@@ -27,6 +27,7 @@ export function individualCarsFormReducer(state = initialFormState, action: CarF
       let newUrls: Array<UrlFieldState> = [...state.urls];
       newUrls[addIndex] = {value: '', show: true};
       return {
+        ...state,
         urls: newUrls
       };
     }
@@ -34,6 +35,7 @@ export function individualCarsFormReducer(state = initialFormState, action: CarF
       let newUrls: Array<UrlFieldState> = [...state.urls];
       newUrls[action.index].show = false;
       return {
+        ...state,
         urls: newUrls
       };
     }
@@ -41,6 +43,7 @@ export function individualCarsFormReducer(state = initialFormState, action: CarF
       let newUrls: Array<UrlFieldState> = [...state.urls];
       newUrls[action.index] = action.url;
       return {
+        ...state,
         urls: newUrls
       };
     }
