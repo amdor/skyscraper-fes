@@ -4,6 +4,8 @@ import { CarDataState } from './car-data-table/car-data-table.reducer';
 
 export { UrlFieldState } from './individual-cars-form/individual-cars-form.reducer';
 export { individualCarsFormReducer } from './individual-cars-form/individual-cars-form.reducer';
+export { carDataTableReducer } from './car-data-table/car-data-table.reducer';
+export { CarData, CarDataState } from './car-data-table/car-data-table.reducer';
 
 export interface AppState {
     individualCars: FormState,

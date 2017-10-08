@@ -1,7 +1,7 @@
 <form role="form" class="form" id="postForm">
     <div *ngFor="let uri of savedUris; index as $index; trackBy: trackByIndex">
         <div *ngIf="uri.show" class="inputTextDiv form-group row" id="uriArray{{$index}}">
-            <div class="col-xs-10 col-sm-10 col-sm-10">
+            <div class="col-xs-10 col-sm-10 col-md-10">
                 <input id="uriInputField{{$index}}" type="url" name="carUri{{$index}}" class="form-control" placeholder="hasznaltauto.hu url"
                         (focus)=addNewRow($index) (keyup)="addNewUrl($event, $index)" value="{{uri.value}}">
             </div>
@@ -14,7 +14,8 @@
     <div class="row" id="sendButtonDiv">
         <div class="col-md-10">
             <input id="sendButton" class="btn btn-primary form-control" type="button" 
-            (click)="fetchCarValue()" value="Elküldés">
+            (click)="getCarData()" value="Elküldés">
         </div>
     </div>
 </form>
+<car-data-table></car-data-table>

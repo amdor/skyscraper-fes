@@ -15,7 +15,6 @@ import * as template from './app.html';
  */
 @Component({
   selector: 'app',
-  encapsulation: ViewEncapsulation.None,
   // https://medium.com/@frosty/angularjs-template-vs-templateurl-cdde055b7907
   template: `${template}`
 })

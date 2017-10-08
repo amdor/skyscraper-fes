@@ -1,0 +1,38 @@
+<table class="table-striped table-hover" *ngIf="!!carData && carData.length > 0">
+    <thead>
+        <tr>
+            <th class="col-md-2">Név</th>
+            <th class="col-md-1">Évjárat</th>
+            <th class="col-md-1">Ár</th>
+            <th class="col-md-1">Kilóméteróra állása</th>
+            <th class="col-md-1">Tömeg</th>
+            <th class="col-md-1">Csomagtartó méret</th>
+            <th class="col-md-1">Állapot</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let car of carData">
+            <td class="col-md-2">
+                <a href="{{car.CarUri}}"><strong>{{getCarName(car) | uppercase}}</strong></a>
+            </td>
+            <td class="col-md-1">
+               {{car.age}}
+            </td>
+            <td class="col-md-1">
+               {{car.price}}
+            </td>
+            <td class="col-md-1">
+               {{car.speedometer}}
+            </td>
+            <td class="col-md-1">
+               {{car.mass}}
+            </td>
+            <td class="col-md-1">
+               {{car.trunk}}
+            </td>
+            <td class="col-md-1">
+               {{car.condition}}
+            </td>
+        </tr>
+    </tbody>
+</table>
