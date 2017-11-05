@@ -8,7 +8,7 @@ import { Action } from '@ngrx/store';
 import { Actions, Effect } from '@ngrx/effects';
 import { of } from 'rxjs/observable/of';
 
-import { CarDataActions, GetAction, GET, GET_SUCCESS, GET_FAILED } from './../actions/car-data.actions'
+import { CarDataActions, GetAction, GET, GET_SUCCESS, GET_FAILED } from './../actions'
 
 @Injectable()
 export class CarDataEffects {
@@ -22,5 +22,5 @@ export class CarDataEffects {
                 .catch(() => of({ type: GET_FAILED }))
     });
 
-  constructor(private http: HttpClient, private actions$: Actions) {}      
+  constructor(private http: HttpClient, private actions$: Actions) {}
 }

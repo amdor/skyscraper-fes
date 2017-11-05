@@ -10,8 +10,8 @@ import { AppState, UrlFieldState } from './../../reducers';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import { AddAction, SetAction, RemoveAction } from './../../actions/individual-cars-form.actions';
-import { GetAction } from './../../actions/car-data.actions';
+import { AddAction, SetAction, RemoveAction } from './../../actions';
+import { GetAction } from './../../actions';
 
 import * as template from './individual-cars-form.component.html';
 import * as style from './individual-cars-form.component.scss';

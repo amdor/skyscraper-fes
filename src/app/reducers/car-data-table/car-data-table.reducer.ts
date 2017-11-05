@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { CarDataActions, GET_SUCCESS, GET_FAILED } from './../../actions/car-data.actions';
+import { CarDataActions, GET_SUCCESS, GET_FAILED } from './../../actions';
 
 
 export interface CarDataState {

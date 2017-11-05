@@ -1,4 +1,4 @@
-import {CarFormActions, ADD, SET, REMOVE} from './../../actions/individual-cars-form.actions';
+import {CarFormActions, ADD, SET, REMOVE} from './../../actions';
 
 export interface FormState {
   urls: UrlFieldState[];
