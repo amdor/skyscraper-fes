@@ -1,18 +1,19 @@
 <table class="table-striped table-hover" *ngIf="!!carData && carData.length > 0">
     <thead>
         <tr>
-            <th class="col-md-2">Név</th>
+            <th class="col-md-1">Név</th>
             <th class="col-md-1">Évjárat</th>
             <th class="col-md-1">Ár</th>
             <th class="col-md-1">Kilóméteróra állása</th>
             <th class="col-md-1">Tömeg</th>
             <th class="col-md-1">Csomagtartó méret</th>
             <th class="col-md-1">Állapot</th>
+            <th class="col-md-1">Érték</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let car of carData">
-            <td class="col-md-2">
+        <tr *ngFor="let car of carData$ | async">
+            <td class="col-md-1">
                 <a href="{{car.CarUri}}"><strong>{{getCarName(car) | uppercase}}</strong></a>
             </td>
             <td class="col-md-1">
@@ -32,6 +33,9 @@
             </td>
             <td class="col-md-1">
                {{car.condition}}
+            </td>
+            <td class="col-md-1">
+               {{car.worth}}
             </td>
         </tr>
     </tbody>
