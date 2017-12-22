@@ -18,6 +18,7 @@ import { AppComponent } from './app.component';
 import { IndividualCarsFormComponent, CarDataTableComponent } from './components';
 import { individualCarsFormReducer, carDataTableReducer } from './reducers';
 import { CarDataEffects } from './effects/car-data-effects';
+import { SpinnerService } from './services/spinner-service';
 
 import '../styles/styles.scss';
 /**
@@ -46,7 +47,8 @@ import '../styles/styles.scss';
    * Expose our Services and Providers into Angular's dependency injection.
    */
   providers: [
-    ENV_PROVIDERS
+    ENV_PROVIDERS,
+    SpinnerService
   ]
 })
 export class AppModule {

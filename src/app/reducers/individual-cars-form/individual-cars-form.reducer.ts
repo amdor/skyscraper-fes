@@ -11,8 +11,17 @@ export interface UrlFieldState {
 
 export const initialFormState: FormState = {
   urls: function() {
-    let retVal = new Array<UrlFieldState>(10).fill({value: '', show: false}, 1);
-    retVal[0] = {value: '', show: true};
+    const storageUrls = JSON.parse(localStorage.getItem('carUrls'));
+    let retVal = new Array<UrlFieldState>(10)
+    if(storageUrls) {
+      for(let i = 0; i < retVal.length; i++) {
+        const url = storageUrls[i];
+        retVal[i] = {value: url || '', show: !!url};
+      }
+    }else {
+      retVal.fill({value: '', show: false}, 1);
+      retVal[0] = {value: '', show: true};
+    }
     return retVal;
   }()
 };
@@ -34,6 +43,7 @@ export function individualCarsFormReducer(state = initialFormState, action: CarF
     case REMOVE: {
       let newUrls: Array<UrlFieldState> = [...state.urls];
       newUrls[action.index].show = false;
+      newUrls[action.index].value = '';
       return {
         ...state,
         urls: newUrls

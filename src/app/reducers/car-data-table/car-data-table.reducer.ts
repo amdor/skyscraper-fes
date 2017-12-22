@@ -30,7 +30,7 @@ export function carDataTableReducer(state = initialCarDataState, action: CarData
       }
     }
     case GET_FAILED: {
-      console.log("Failed to get car data.");
+      console.error("Failed to get car data.");
       return state;
     }
     default: return state;

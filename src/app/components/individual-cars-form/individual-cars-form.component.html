@@ -5,7 +5,7 @@
                 <input id="uriInputField{{$index}}" type="url" name="carUri{{$index}}" class="form-control" placeholder="hasznaltauto.hu url"
                         (focus)=addNewRow($index) (keyup)="addNewUrl($event, $index)" value="{{uri.value}}">
             </div>
-            <button class="btn btn-default btn-sm col-xs-1 col-sm-1 col-md-1 form-control-static" type="button" 
+            <button class="btn btn-default btn-sm col-xs-1 col-sm-1 col-md-1 form-control-static" type="button"
                     id="inputButtonMinus{{$index}}" *ngIf="!!$index" (click)='deleteRow($index)'>
                     -
             </button>
@@ -13,9 +13,10 @@
     </div>
     <div class="row" id="sendButtonDiv">
         <div class="col-md-10">
-            <input id="sendButton" class="btn btn-primary form-control" type="button" 
-            (click)="getCarData()" value="Elküldés">
+            <input id="sendButton" class="btn btn-primary form-control" type="button"
+            (click)="getCarData()" value="Összehasonlítás">
         </div>
     </div>
 </form>
+<i *ngIf="spinner" class="fa fa-spinner fa-spin fa-4x fa-fw col-md-10"></i>
 <car-data-table></car-data-table>

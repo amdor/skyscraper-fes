@@ -23,8 +23,8 @@ export class CarDataTableComponent implements OnDestroy {
 
 	constructor(private store: Store<AppState>) {
 		this.subscription = store.select(state => state.carData).subscribe((carDataState) => {
-            this.carData = carDataState.cars;
-        });
+            this.carData = carDataState.cars.sort((car1, car2) => {return car2.worth - car1.worth;});
+    });
 	}
 
      ngOnDestroy(): void {
