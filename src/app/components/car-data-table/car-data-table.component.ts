@@ -7,14 +7,12 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
-import * as template from './car-data-table.component.html';
-
 import { CarData, AppState } from './../../reducers'
 
 
 @Component({
     selector: 'car-data-table',
-    template: `${template}`,
+    templateUrl: './car-data-table.component.html',
     styles: []
 })
 export class CarDataTableComponent implements OnDestroy {
@@ -23,7 +21,7 @@ export class CarDataTableComponent implements OnDestroy {
 
 	constructor(private store: Store<AppState>) {
 		this.subscription = store.select(state => state.carData).subscribe((carDataState) => {
-            this.carData = carDataState.cars.sort((car1, car2) => {return car2.worth - car1.worth;});
+            this.carData = carDataState.cars.sort((car1, car2) => car2.worth - car1.worth);
     });
 	}
 

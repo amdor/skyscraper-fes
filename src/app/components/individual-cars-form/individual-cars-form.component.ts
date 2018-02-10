@@ -11,16 +11,13 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { AddAction, SetAction, RemoveAction, GetAction } from './../../actions';
-import { SpinnerService } from './../../services/spinner-service';
-
-import * as template from './individual-cars-form.component.html';
-import * as style from './individual-cars-form.component.scss';
+import { SpinnerService } from './../../services/spinner.service';
 
 
 @Component({
   selector: 'individual-cars-form',
-  template: `${template}`,
-  styles: [`${style}`]
+  templateUrl: './individual-cars-form.component.html',
+  styleUrls: ['./individual-cars-form.component.scss']
   })
 export class IndividualCarsFormComponent implements OnDestroy {
   private savedUris: UrlFieldState[];

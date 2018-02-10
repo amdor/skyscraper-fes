@@ -14,7 +14,8 @@ export interface CarData {
   power: string,
   price: string,
   speedometer: string,
-  trunk: string
+  trunk: string,
+  worth: number
 }
 
 export const initialCarDataState: CarDataState = {

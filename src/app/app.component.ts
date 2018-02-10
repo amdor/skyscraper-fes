@@ -1,23 +1,10 @@
-/**
- * Angular 2 decorators and services
- */
-import {
-  Component,
-  ViewEncapsulation
-} from '@angular/core';
-import { AppState } from './app.service';
+import { Component } from '@angular/core';
 
-import * as template from './app.html';
-
-/**
- * App Component
- * Top Level Component
- */
 @Component({
-  selector: 'app',
-  // https://medium.com/@frosty/angularjs-template-vs-templateurl-cdde055b7907
-  template: `${template}`
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  public name = 'Skyscraper';
+  title = 'app';
 }
