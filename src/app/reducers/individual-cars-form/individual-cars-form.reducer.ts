@@ -11,7 +11,7 @@ export interface UrlFieldState {
 
 export const initialFormState: FormState = {
   urls: function() {
-    const storageUrls = JSON.parse(localStorage.getItem('carUrls'));
+    const storageUrls = JSON.parse(localStorage.getItem('htmls')).map(element => Object.keys(element)[0]);
     let retVal = new Array<UrlFieldState>(10)
     if(storageUrls) {
       for(let i = 0; i < retVal.length; i++) {
