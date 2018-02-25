@@ -6,16 +6,16 @@ import {
   ViewEncapsulation
   } from '@angular/core';
 import { OnDestroy } from '@angular/core';
-import { AppState, UrlFieldState } from './../../reducers';
+import { AppState, UrlFieldState } from '../../reducers';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import { AddAction, SetAction, RemoveAction, GetAction } from './../../actions';
-import { SpinnerService } from './../../services/spinner.service';
+import { AddAction, SetAction, RemoveAction, GetAction } from '../../actions';
+import { SpinnerService } from '../../services/spinner.service';
 
 
 @Component({
-  selector: 'individual-cars-form',
+  selector: 'ssc-individual-cars-form',
   templateUrl: './individual-cars-form.component.html',
   styleUrls: ['./individual-cars-form.component.scss']
   })
