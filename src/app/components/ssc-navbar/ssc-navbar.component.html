@@ -10,6 +10,14 @@
         <!--<ul class="navbar-nav mr-auto mt-2 mt-lg-0">-->
             <!--navbar left items-->
         <!--</ul>-->
-        <a href="/login" class="ml-auto my-2 my-lg-0" id="logoutNavElem">Login</a>
+        <div class="ml-auto my-2 my-lg-0 mr-1" ngbDropdown >
+            <a ngbDropdownToggle href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img [src]="profile.getImageUrl() || 'favicon.png'" class="rounded-circle">
+            </a>
+            <div ngbDropdownMenu placement="left" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Logout</a>
+            </div>
+        </div>
+        <div id="googleLogin" *ngIf="!isSignedIn" (click)="login()"></div>
     </div>
 </nav>
