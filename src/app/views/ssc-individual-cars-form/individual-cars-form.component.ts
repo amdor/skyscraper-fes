@@ -8,7 +8,6 @@ import {
 import { OnDestroy } from '@angular/core';
 import { AppState, UrlFieldState } from '../../reducers';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { AddAction, SetAction, RemoveAction, GetAction } from '../../actions';
 import { SpinnerService } from '../../services/spinner.service';

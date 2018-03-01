@@ -1,13 +1,16 @@
-import { FormState } from './individual-cars-form/individual-cars-form.reducer';
-import { CarDataState } from './car-data-table/car-data-table.reducer';
+import {FormState} from './individual-cars-form/individual-cars-form.reducer';
+import {CarDataState} from './car-data-table/car-data-table.reducer';
+import {AuthState} from './auth/auth.reducer';
 
 
-export { UrlFieldState } from './individual-cars-form/individual-cars-form.reducer';
-export { individualCarsFormReducer } from './individual-cars-form/individual-cars-form.reducer';
-export { carDataTableReducer } from './car-data-table/car-data-table.reducer';
-export { CarData, CarDataState } from './car-data-table/car-data-table.reducer';
+export {UrlFieldState} from './individual-cars-form/individual-cars-form.reducer';
+export {individualCarsFormReducer} from './individual-cars-form/individual-cars-form.reducer';
+export {carDataTableReducer} from './car-data-table/car-data-table.reducer';
+export {authReducer} from './auth/auth.reducer';
+export {CarData, CarDataState} from './car-data-table/car-data-table.reducer';
 
 export interface AppState {
-    individualCars: FormState,
-    carData: CarDataState
+    individualCars: FormState;
+    carData: CarDataState;
+    googleAuth: AuthState;
 }
