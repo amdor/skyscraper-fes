@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 import {Store} from '@ngrx/store';
-import {AppState} from '../../reducers/index';
+import {AppState, selectAuth2, selectIsSignedIn} from '../../reducers/index';
+import {AuthLoadedAction} from '../../actions/auth.actions';
 
 
 @Component({
@@ -10,28 +10,36 @@ import {AppState} from '../../reducers/index';
     templateUrl: './ssc-navbar.component.html',
     styleUrls: ['./ssc-navbar.component.scss']
 })
-export class SscNavbarComponent implements OnInit {
-
-
+export class SscNavbarComponent implements OnDestroy, OnInit {
     isCollapsed = true;
     auth2: any;
     profile: any;
     isSignedIn = false;
-    subscription: Subscription;
+    subscription: Subscription = new Subscription;
 
-    constructor(private store: Store<AppState>) {
-        this.subscription = store.select(state => state.googleAuth).subscribe((googleAuth) => {
-            this.auth2 = googleAuth.auth2;
-        });
+    constructor(private store: Store<AppState>, private cdRef: ChangeDetectorRef) {
     }
 
     ngOnInit() {
+        this.subscription.add(this.store.select(selectAuth2).subscribe((auth2) => {
+            if(auth2.currentUser) {
+                this.auth2 = auth2;
+                this.isSignedIn = this.auth2.currentUser.get().isSignedIn();
+                this.profile = this.isSignedIn ? this.auth2.currentUser.get().getBasicProfile() : {};
+                this.cdRef.detectChanges();
+            }
+        }));
+        this.subscription.add(this.store.select(selectIsSignedIn).subscribe(isSignedIn => {
+            this.isSignedIn = isSignedIn;
+            this.cdRef.detectChanges();
+        }));
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
     }
 
     login() {
-        if(this.isSignedIn) {
-            return;
-        }
         const options = {
             prompt: 'select_account',
             ux_mode: 'popup'
@@ -44,6 +52,12 @@ export class SscNavbarComponent implements OnInit {
                 console.error(error);
             }
         );
+    }
+
+    logout() {
+        this.auth2.signOut().then(() => {
+            this.store.dispatch(new AuthLoadedAction(this.auth2));
+        });
     }
 
 }

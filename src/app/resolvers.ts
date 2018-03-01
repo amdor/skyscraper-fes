@@ -3,13 +3,14 @@ import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/rou
 import {Observable} from 'rxjs/Observable';
 import {AppState} from './reducers/index';
 import {Store} from '@ngrx/store';
-import {AuthLoadedAction} from './actions';
+import {AuthLoadedAction, SignInStatusChange} from './actions';
 
 declare const gapi: any;
 
 @Injectable()
 export class GoogleAuthResolver implements Resolve<any> {
     clientId = '498731538493-etubco5p4at0chs18tuqmqmm8g3ngtr1.apps.googleusercontent.com';
+    auth2: any;
 
     constructor(private store: Store<AppState>) {
     }
@@ -22,12 +23,13 @@ export class GoogleAuthResolver implements Resolve<any> {
                 client_id: this.clientId,
             }).then(
                 (auth2) => {
-                    this.store.dispatch(new AuthLoadedAction(auth2));
-                    auth2.isSignedIn.listen((isSignedIn) => {
-
-                    });
-                    auth2.currentUser.listen((currentUser) => {
-
+                    // smaking them global
+                    this.auth2 = auth2;
+                    this.store.dispatch(new AuthLoadedAction(this.auth2));
+                    const currentUser = auth2.currentUser.get();
+                    this.store.dispatch(new SignInStatusChange(currentUser.isSignedIn()));
+                    this.auth2.isSignedIn.listen((isSignedIn) => {
+                        this.store.dispatch(new SignInStatusChange(isSignedIn));
                     });
                 },
                 (err) => {
