@@ -8,13 +8,13 @@ import { Actions, Effect } from '@ngrx/effects';
 import { of } from 'rxjs/observable/of';
 import { SpinnerService } from './../services/spinner.service';
 
-import { GetAction, GetSuccessAction, GetFailedAction, GET } from './../actions'
+import { GetAction, GetSuccessAction, GetFailedAction, GET } from './../actions';
 
 @Injectable()
 export class CarDataEffects {
   @Effect() getCarData$: Observable<GetSuccessAction | GetFailedAction> = this.actions$.ofType(GET)
     .mergeMap((action: GetAction) => {
-        return this.http.post('https://localhost:5000/', {carUrls: action.urlValues})
+        return this.http.post('https://localhost:5000/', {carUrls: action.urlValues, userIdToken: action.idToken})
                 .map((data: Array<any>) => {
                   this.spinnerService.setSpinner(false);
                   return new GetSuccessAction(data);

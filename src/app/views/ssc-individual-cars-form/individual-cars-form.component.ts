@@ -5,10 +5,10 @@ import {
     Component
 } from '@angular/core';
 import {OnDestroy} from '@angular/core';
-import {AppState} from '../../reducers';
-import {Store} from '@ngrx/store';
+import {AppState, selectAuth2} from '../../reducers';
+import {select, Store} from '@ngrx/store';
 import {Subscription} from 'rxjs/Subscription';
-import {SetAction, RemoveAction, GetAction} from '../../actions';
+import {SetAction, GetAction} from '../../actions';
 import {SpinnerService} from '../../services/spinner.service';
 
 
@@ -20,6 +20,7 @@ import {SpinnerService} from '../../services/spinner.service';
 export class IndividualCarsFormComponent implements OnDestroy {
     uris: string[];
     spinner = false;
+    private idToken = '';
     private subscription: Subscription = new Subscription();
 
     constructor(private store: Store<AppState>, private spinnerService: SpinnerService) {
@@ -28,6 +29,14 @@ export class IndividualCarsFormComponent implements OnDestroy {
                 this.uris = urls;
             })
         );
+
+        this.subscription.add(this.store.select(selectAuth2).subscribe((auth2) => {
+            if(auth2.currentUser) {
+                const currentUser = auth2.currentUser.get();
+                const isSignedIn = currentUser.isSignedIn();
+                this.idToken = isSignedIn ? currentUser.getAuthResponse().id_token : '';
+            }
+        }));
         this.subscription.add(
             spinnerService.subscribe(waiting => {
                 this.spinner = waiting;
@@ -45,7 +54,7 @@ export class IndividualCarsFormComponent implements OnDestroy {
 
     getCarData() {
         this.spinner = true;
-        this.store.dispatch(new GetAction(this.uris));
+        this.store.dispatch(new GetAction(this.uris, this.idToken));
     }
 
     trackByIndex(elem, index) {
