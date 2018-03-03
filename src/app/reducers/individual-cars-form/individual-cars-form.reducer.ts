@@ -6,7 +6,9 @@ export interface FormState {
 
 export const initialFormState: FormState = {
     urls: function() {
-        const storageUrls = JSON.parse(localStorage.getItem('htmls')).map(element => Object.keys(element)[0]);
+
+        let storageUrls = JSON.parse(localStorage.getItem('htmls'));
+        storageUrls = storageUrls ? storageUrls.map(element => Object.keys(element)[0]) : [];
         const retVal = new Array<string>(10);
         if(storageUrls) {
             for(let i = 0; i < retVal.length; i++) {
