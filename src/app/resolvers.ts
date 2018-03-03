@@ -22,7 +22,7 @@ export class GoogleAuthResolver implements Resolve<any> {
                 client_id: this.clientId,
             }).then(
                 (auth2) => {
-                    // smaking them global
+                    // making them global
                     this.auth2 = auth2;
                     this.store.dispatch(new AuthLoadedAction(this.auth2));
                     const currentUser = auth2.currentUser.get();
@@ -32,7 +32,7 @@ export class GoogleAuthResolver implements Resolve<any> {
                     });
                 },
                 (err) => {
-                    console.log('Failed to initialize auth object ' + err);
+                    console.error('Failed to initialize auth object ' + err);
                 }
             );
         });

@@ -10,7 +10,7 @@ export const initialFormState: FormState = {
         let storageUrls = JSON.parse(localStorage.getItem('htmls'));
         storageUrls = storageUrls ? storageUrls.map(element => Object.keys(element)[0]) : [];
         const retVal = new Array<string>(10);
-        if(storageUrls) {
+        if(storageUrls.length) {
             for(let i = 0; i < retVal.length; i++) {
                 const url = storageUrls[i];
                 retVal[i] = url || '';
