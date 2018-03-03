@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "node server.js",
     "build": "ng build --prod",
-    "postinstall": "ng build --aot -prod",
+    "postinstall": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -26,6 +26,7 @@
     "@angular/core": "^5.2.0",
     "@angular/forms": "^5.2.0",
     "@angular/http": "^5.2.0",
+    "@angular/language-service": "^5.2.0",
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
@@ -40,7 +41,6 @@
     "zone.js": "^0.8.19"
   },
   "devDependencies": {
-    "@angular/language-service": "^5.2.0",
     "@types/jasmine": "~2.8.3",
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~6.0.60",
