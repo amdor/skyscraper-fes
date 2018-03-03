@@ -1,5 +1,5 @@
 <!--Navbar-->
-<nav class="navbar navbar-dark bg-dark navbar-expand-md mx-3 rounded">
+<nav class="navbar navbar-dark bg-dark navbar-expand-md mx-3 my-4 rounded">
     <a class="navbar-brand" href="/#">Skyscraper</a>
     <button type="button" class="navbar-toggler" data-toggle="collapse"
             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -11,7 +11,8 @@
             <!--navbar left items-->
         <!--</ul>-->
         <div class="ml-auto my-2 my-lg-0 mr-1" ngbDropdown placement="bottom-right">
-            <a ngbDropdownToggle href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a ngbDropdownToggle href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+               aria-expanded="false" class="float-right">
                 <img [src]="isSignedIn ? profile.getImageUrl() : 'favicon.png'" class="rounded-circle">
             </a>
             <div ngbDropdownMenu aria-labelledby="navbarDropdown">

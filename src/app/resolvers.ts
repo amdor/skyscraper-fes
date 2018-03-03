@@ -17,7 +17,6 @@ export class GoogleAuthResolver implements Resolve<any> {
 
     resolve(route: ActivatedRouteSnapshot,
             state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-        console.log('resolver ' + gapi);
         return gapi.load('auth2', () => {
             gapi.auth2.init({
                 client_id: this.clientId,

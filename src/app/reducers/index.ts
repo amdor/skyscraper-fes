@@ -3,8 +3,6 @@ import {CarDataState} from './car-data-table/car-data-table.reducer';
 import {AuthState} from './auth/auth.reducer';
 import {createSelector} from '@ngrx/store';
 
-
-export {UrlFieldState} from './individual-cars-form/individual-cars-form.reducer';
 export {individualCarsFormReducer} from './individual-cars-form/individual-cars-form.reducer';
 export {carDataTableReducer} from './car-data-table/car-data-table.reducer';
 export {authReducer} from './auth/auth.reducer';

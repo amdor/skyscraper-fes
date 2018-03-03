@@ -1,20 +1,17 @@
 <form role="form" class="form" id="postForm">
-    <div *ngFor="let uri of savedUris; index as $index; trackBy: trackByIndex">
-        <div *ngIf="uri.show" class="inputTextDiv form-group row" id="uriArray{{$index}}">
-            <div class="col-xs-10 col-sm-10 col-md-10">
-                <input id="uriInputField{{$index}}" type="url" name="carUri{{$index}}" class="form-control" placeholder="hasznaltauto.hu url"
-                        (focus)=addNewRow($index) (keyup)="addNewUrl($event, $index)" value="{{uri.value}}">
+    <div *ngFor="let uri of uris; index as $index; trackBy: trackByIndex">
+        <div class="inputTextDiv form-group row">
+            <div class="offset-1 col-10">
+                <input type="url" class="form-control"
+                       placeholder="hasznaltauto.hu url"
+                       (keyup)="addNewUrl($event, $index)" value="{{uri}}">
             </div>
-            <button class="btn btn-default btn-sm col-xs-1 col-sm-1 col-md-1 form-control-static" type="button"
-                    id="inputButtonMinus{{$index}}" *ngIf="!!$index" (click)='deleteRow($index)'>
-                    -
-            </button>
         </div>
     </div>
-    <div class="row" id="sendButtonDiv">
-        <div class="col-md-10">
-            <input id="sendButton" class="btn btn-primary form-control" type="button"
-            (click)="getCarData()" value="Összehasonlítás">
+    <div class="row">
+        <div class="offset-1 col-10">
+            <input class="btn btn-primary form-control" type="button"
+                   (click)="getCarData()" value="Összehasonlítás">
         </div>
     </div>
 </form>
