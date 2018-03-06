@@ -1,15 +1,13 @@
 /**
  * Form for cars put in individually
  */
-import {
-    Component
-} from '@angular/core';
-import {OnDestroy} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {AppState, selectAuth2} from '../../reducers';
-import {select, Store} from '@ngrx/store';
+import {Store} from '@ngrx/store';
 import {Subscription} from 'rxjs/Subscription';
-import {SetAction, GetAction} from '../../actions';
+import {GetAction, SetAction} from '../../actions';
 import {SpinnerService} from '../../services/spinner.service';
+import 'rxjs/add/operator/take';
 
 
 @Component({
@@ -24,10 +22,9 @@ export class IndividualCarsFormComponent implements OnDestroy {
     private subscription: Subscription = new Subscription();
 
     constructor(private store: Store<AppState>, private spinnerService: SpinnerService) {
-        this.subscription.add(
-            store.select(state => state.individualCars.urls).subscribe((urls) => {
+        store.select(state => state.individualCars.urls).take(1).subscribe((urls) => {
                 this.uris = urls;
-            })
+            }
         );
 
         this.subscription.add(this.store.select(selectAuth2).subscribe((auth2) => {
@@ -48,8 +45,8 @@ export class IndividualCarsFormComponent implements OnDestroy {
         this.subscription.unsubscribe();
     }
 
-    addNewUrl(event: any, index: number) {
-        this.store.dispatch(new SetAction(event.target.value, index));
+    addNewUrl(uri: string, index: number) {
+        this.store.dispatch(new SetAction(uri, index));
     }
 
     getCarData() {
@@ -57,7 +54,7 @@ export class IndividualCarsFormComponent implements OnDestroy {
         this.store.dispatch(new GetAction(this.uris, this.idToken));
     }
 
-    trackByIndex(elem, index) {
+    trackByIndex(index: number, obj: any): any {
         return index;
     }
 
