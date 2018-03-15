@@ -5,7 +5,7 @@ import {
 import {Store} from '@ngrx/store';
 import {Subscription} from 'rxjs/Subscription';
 
-import {CarData, AppState} from './../../reducers'
+import {CarData, AppState} from './../../reducers';
 
 
 @Component({
@@ -16,6 +16,8 @@ import {CarData, AppState} from './../../reducers'
 export class CarDataTableComponent implements OnDestroy {
     carData: CarData[];
     subscription: Subscription;
+    carNames: Array<string> = new Array(10).fill('');
+    editMode = false;
 
     constructor(private store: Store<AppState>) {
         this.subscription = store.select(state => state.carData).subscribe((carDataState) => {
@@ -25,9 +27,5 @@ export class CarDataTableComponent implements OnDestroy {
 
     ngOnDestroy(): void {
         this.subscription.unsubscribe();
-    }
-
-    getCarName = (car: CarData) => {
-        return car.CarUri.split('/').pop().split('_').slice(0, 2).join(' ');
     }
 }

@@ -11,7 +11,7 @@ export const GET_FAILED = '[Car Data] Get Failed';
 export class GetAction implements Action {
     readonly type = GET;
 
-    constructor(public urlValues: string[], public idToken: string) {
+    constructor(public urlValues: string[]) {
     }
 }
 

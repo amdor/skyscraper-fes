@@ -51,7 +51,7 @@ export class IndividualCarsFormComponent implements OnDestroy {
 
     getCarData() {
         this.spinner = true;
-        this.store.dispatch(new GetAction(this.uris, this.idToken));
+        this.store.dispatch(new GetAction(this.uris));
     }
 
     trackByIndex(index: number, obj: any): any {

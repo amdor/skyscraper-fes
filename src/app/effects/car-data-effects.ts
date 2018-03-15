@@ -14,7 +14,7 @@ import { GetAction, GetSuccessAction, GetFailedAction, GET } from './../actions'
 export class CarDataEffects {
   @Effect() getCarData$: Observable<GetSuccessAction | GetFailedAction> = this.actions$.ofType(GET)
     .mergeMap((action: GetAction) => {
-        return this.http.post('https://localhost:5000/', {carUrls: action.urlValues, userIdToken: action.idToken})
+        return this.http.post('https://localhost:5000/', {carUrls: action.urlValues})
                 .map((data: Array<any>) => {
                   this.spinnerService.setSpinner(false);
                   return new GetSuccessAction(data);
