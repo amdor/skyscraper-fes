@@ -15,5 +15,7 @@
         </div>
     </div>
 </div>
-<i *ngIf="spinner" class="fa fa-spinner fa-spin fa-4x fa-fw col-md-10"></i>
-<ssc-car-data-table></ssc-car-data-table>
+<div class="text-center" *ngIf="spinner">
+    <i class="fa fa-spinner fa-spin fa-4x fa-fw col-md-10"></i>
+</div>
+<ssc-car-data-table *ngIf="!spinner"></ssc-car-data-table>

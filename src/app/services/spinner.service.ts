@@ -6,7 +6,7 @@ import {Subject} from 'rxjs/Subject';
 export class SpinnerService {
 
   private spinnerSubject: Subject<boolean> = new Subject();
-  private spinnerObservable : Observable<boolean> = this.spinnerSubject.asObservable();
+  private spinnerObservable: Observable<boolean> = this.spinnerSubject.asObservable();
 
   subscribe(success, err?) {
     return this.spinnerObservable.subscribe(success, err);

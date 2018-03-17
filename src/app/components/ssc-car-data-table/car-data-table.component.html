@@ -1,42 +1,37 @@
-<table class="table-striped table-hover" *ngIf="!!carData && carData.length > 0">
+<table class="table-striped table-hover container" *ngIf="!!carData && carData.length > 0">
     <thead>
-        <tr>
-            <th class="col-md-2">Név</th>
-            <th class="col-md-1">Évjárat</th>
-            <th class="col-md-1">Ár</th>
-            <th class="col-md-1">Kilóméteróra állása</th>
-            <th class="col-md-1">Tömeg</th>
-            <th class="col-md-1">Csomagtartó méret</th>
-            <th class="col-md-1">Állapot</th>
-            <th class="col-md-1">Érték</th>
-        </tr>
+    <tr class="row">
+        <th class="col-md-3">Név & link</th>
+        <th class="col-md-1">Évjárat</th>
+        <th class="col-md-3">Ár</th>
+        <th class="col-md-2">Kilóméteróra állása</th>
+        <th class="col-md-2">Teljesítmény</th>
+        <th class="col-md-1">Érték</th>
+    </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let car of carData">
-            <td class="col-md-2">
-                <a href="{{car.CarUri}}"><strong>{{getCarName(car) | uppercase}}</strong></a>
-            </td>
-            <td class="col-md-1">
-               {{car.age}}
-            </td>
-            <td class="col-md-1">
-               {{car.price}}
-            </td>
-            <td class="col-md-1">
-               {{car.speedometer}}
-            </td>
-            <td class="col-md-1">
-               {{car.mass}}
-            </td>
-            <td class="col-md-1">
-               {{car.trunk}}
-            </td>
-            <td class="col-md-1">
-               {{car.condition}}
-            </td>
-            <td class="col-md-1">
-               {{car.worth}}
-            </td>
-        </tr>
+    <tr *ngFor="let car of carData; let i=index;" class="row">
+        <td class="col-md-3">
+            <input type="text" *ngIf="editMode" [(ngModel)]="carNames[i]">
+            <a href="{{car.CarUri}}" *ngIf="!editMode"><strong>{{carNames[i]|| 'Link neve'}}</strong></a>
+            <i class="fa fa-edit float-right" *ngIf="!editMode" (click)="editMode = !editMode"></i>
+            <i class="fa fa-check-square float-right" *ngIf="editMode" (click)="editMode = !editMode"></i>
+        </td>
+        <td class="col-md-1">
+            {{car.prod_date}}
+        </td>
+        <td class="col-md-3">
+            {{car.price}}
+        </td>
+        <td class="col-md-2">
+            {{car.speedometer}}
+        </td>
+        <td class="col-md-2">
+            {{car.power}}
+        </td>
+        <td class="col-md-1">
+            {{car.worth}}
+        </td>
+    </tr>
     </tbody>
 </table>
