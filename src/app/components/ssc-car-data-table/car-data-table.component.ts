@@ -5,7 +5,8 @@ import {
 import {Store} from '@ngrx/store';
 import {Subscription} from 'rxjs/Subscription';
 
-import {CarData, AppState} from './../../reducers';
+import {AppState} from './../../reducers';
+import {CarData} from '../../types/car-dto';
 
 
 @Component({
