@@ -60,7 +60,10 @@ export class IndividualCarsFormComponent implements OnDestroy {
             const rawCarData: RawCarData = {carUrls: [], htmls: {}};
             for(const uri of nonEmptyUris) {
                 rawCarData.carUrls.push(uri);
-                rawCarData.htmls[uri] = await this.getCarHtml(uri);
+                const html =  await this.getCarHtml(uri);
+                if(html) {
+                    rawCarData.htmls[uri] = html;
+                }
             }
             return rawCarData;
         }).take(1).subscribe((rawCarData: RawCarData) => {
@@ -75,7 +78,6 @@ export class IndividualCarsFormComponent implements OnDestroy {
     private async getCarHtml(uri: string) {
         return this.http.get(uri, {responseType: 'text'}).toPromise()
             .catch((err: HttpErrorResponse) => {
-                this.spinnerService.setSpinner(false);
                 console.error('An error occurred:', err.error);
             });
     }
