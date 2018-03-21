@@ -24,6 +24,7 @@ export class IndividualCarsFormComponent implements OnDestroy {
     spinner = false;
     private idToken = '';
     private subscription: Subscription = new Subscription();
+    private readonly proxy = 'https://skyscraper-proxy.herokuapp.com';
 
     constructor(private store: Store<AppState>, private spinnerService: SpinnerService, private http: HttpClient) {
         store.select(state => state.individualCars.urls).take(1).subscribe((urls) => {
@@ -78,6 +79,10 @@ export class IndividualCarsFormComponent implements OnDestroy {
     private async getCarHtml(uri: string) {
         return this.http.get(uri, {responseType: 'text'}).toPromise()
             .catch((err: HttpErrorResponse) => {
+                const requestUrl = (err.error.currentTarget && err.error.currentTarget.__zone_symbol__xhrURL) || err.url || '';
+                if(!requestUrl.includes(this.proxy)) {
+                    return this.getCarHtml(this.proxy + '/' + requestUrl);
+                }
                 console.error('An error occurred:', err.error);
             });
     }
