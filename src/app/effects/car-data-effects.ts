@@ -13,7 +13,7 @@ import { GetCarDataAction, GetSuccessAction, GetFailedAction, GET_CAR_DATA } fro
 export class CarDataEffects {
   @Effect() getCarData$: Observable<GetSuccessAction | GetFailedAction> = this.actions$.ofType(GET_CAR_DATA)
     .mergeMap((action: GetCarDataAction) => {
-        return this.http.post('http://0.0.0.0:5000', action.rawData)
+        return this.http.post('https://skyscraper-bes.herokuapp.com/', action.rawData)
                 .map((data: Array<any>) => {
                   this.spinnerService.setSpinner(false);
                   return new GetSuccessAction(data);
