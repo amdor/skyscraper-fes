@@ -12,7 +12,6 @@ export interface AppState {
     individualCars: FormState;
     carData: CarDataState;
     googleAuth: AuthState;
-    htmls: any;
 }
 
 

@@ -27,13 +27,13 @@ export class IndividualCarsFormComponent implements OnDestroy {
     private readonly proxy = 'https://skyscraper-proxy.herokuapp.com';
 
     constructor(private store: Store<AppState>, private spinnerService: SpinnerService, private http: HttpClient) {
-        this.subscription.add(store.select(state => state).take(1).subscribe((urls) => {
-                this.uris = urls.individualCars.urls;
-            })
+        store.select(state => state.individualCars.urls).take(1).subscribe((urls) => {
+                this.uris = urls;
+            }
         );
 
         this.subscription.add(this.store.select(selectAuth2).subscribe((auth2) => {
-            if (auth2.currentUser) {
+            if(auth2.currentUser) {
                 const currentUser = auth2.currentUser.get();
                 const isSignedIn = currentUser.isSignedIn();
                 this.idToken = isSignedIn ? currentUser.getAuthResponse().id_token : '';
@@ -57,12 +57,12 @@ export class IndividualCarsFormComponent implements OnDestroy {
     getCarData() {
         this.spinnerService.setSpinner(true);
         const nonEmptyUris = this.uris.filter(uri => uri !== '');
-        Observable.defer(async () => {
+        Observable.defer(async() => {
             const rawCarData: RawCarData = {carUrls: [], htmls: {}};
-            for (const uri of nonEmptyUris) {
+            for(const uri of nonEmptyUris) {
                 rawCarData.carUrls.push(uri);
-                const html = await this.getCarHtml(uri);
-                if (html) {
+                const html =  await this.getCarHtml(uri);
+                if(html) {
                     rawCarData.htmls[uri] = html;
                 }
             }
@@ -80,7 +80,7 @@ export class IndividualCarsFormComponent implements OnDestroy {
         return this.http.get(uri, {responseType: 'text'}).toPromise()
             .catch((err: HttpErrorResponse) => {
                 const requestUrl = (err.error.currentTarget && err.error.currentTarget.__zone_symbol__xhrURL) || err.url || '';
-                if (!requestUrl.includes(this.proxy)) {
+                if(!requestUrl.includes(this.proxy)) {
                     return this.getCarHtml(this.proxy + '/' + requestUrl);
                 }
                 console.error('An error occurred:', err.error);

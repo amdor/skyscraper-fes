@@ -2,7 +2,7 @@ import {BrowserModule, DomSanitizer} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import {ActionReducer, StoreModule} from '@ngrx/store';
+import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
 import {RouterModule} from '@angular/router';
 
@@ -21,12 +21,7 @@ import {SscNavbarComponent} from './components/ssc-navbar/ssc-navbar.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {GoogleAuthResolver} from './resolvers';
-import {localStorageSync} from 'ngrx-store-localstorage';
 
-
-export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
-    return localStorageSync({keys: [{individualCars: ['urls']}]})(reducer);
-}
 
 @NgModule({
     declarations: [
@@ -43,11 +38,10 @@ export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionRedu
         NgbModule.forRoot(),
         RouterModule.forRoot(ROUTES),
         StoreModule.forRoot({
-                individualCars: individualCarsFormReducer,
-                carData: carDataTableReducer,
-                googleAuth: authReducer
-            },
-            {metaReducers: [localStorageSyncReducer]}),
+            individualCars: individualCarsFormReducer,
+            carData: carDataTableReducer,
+            googleAuth: authReducer
+        }),
         EffectsModule.forRoot([CarDataEffects])
     ],
     providers: [
