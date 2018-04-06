@@ -1,47 +1,68 @@
-import {CarFormActions, SET, REMOVE} from './../../actions';
+import {CarFormActions, SET, REMOVE, SET_ALL} from './../../actions';
+import {CARS_KEY, LocalStorageService} from '../../services/local-storage.service';
+
+const EMPTY_ARR = new Array<string>(10).fill('');
 
 export interface FormState {
-    urls: string[];
+	urls: string[];
+	prefetchedHtmls: Map<string, string>;
 }
 
 export const initialFormState: FormState = {
-    urls: function() {
-
-        let storageUrls = JSON.parse(localStorage.getItem('htmls'));
-        storageUrls = storageUrls ? storageUrls.map(element => Object.keys(element)[0]) : [];
-        const retVal = new Array<string>(10);
-        if(storageUrls.length) {
-            for(let i = 0; i < retVal.length; i++) {
-                const url = storageUrls[i];
-                retVal[i] = url || '';
-            }
-        } else {
-            retVal.fill('');
-        }
-        return retVal;
-    }()
+	urls: getInitialUrls(),
+	prefetchedHtmls: LocalStorageService.getForKey(CARS_KEY)
 };
 
 export function individualCarsFormReducer(state = initialFormState, action: CarFormActions): FormState {
-    switch(action.type) {
-        case REMOVE: {
-            const newUrls: Array<string> = [...state.urls];
-            newUrls[action.index] = '';
-            return {
-                ...state,
-                urls: newUrls
-            };
-        }
-        case SET: {
-            const newUrls: Array<string> = [...state.urls];
-            newUrls[action.index] = action.url;
-            return {
-                ...state,
-                urls: newUrls
-            };
-        }
-        default: {
-            return state;
-        }
-    }
+	let newUrls: Array<string> = [...state.urls];
+	let newPrefetchedHtmls = {...state.prefetchedHtmls};
+	switch(action.type) {
+		case REMOVE: {
+			newUrls[action.index] = '';
+			break;
+		}
+		case SET: {
+			newUrls = [...state.urls];
+			newUrls[action.index] = action.url;
+			break;
+		}
+		case SET_ALL: {
+			newUrls = [...getNewUrls(action.urls, state.urls.length), ...EMPTY_ARR].slice(0, EMPTY_ARR.length);
+			newPrefetchedHtmls = action.prefetchedHtmls;
+			break;
+		}
+		default: {
+			return state;
+		}
+	}
+	updateStorage(newUrls);
+	return {
+		prefetchedHtmls: newPrefetchedHtmls,
+		urls: newUrls
+	};
+}
+
+function getNewUrls(newUrls: string[], maxLength: number) {
+	return [...newUrls.slice(0, maxLength)];
+}
+
+function getInitialUrls() {
+	const cars = LocalStorageService.getForKey(CARS_KEY);
+	const storageUrls = cars ? Object.keys(cars) : [];
+	let retVal = [];
+	if(storageUrls.length) {
+		retVal = [...storageUrls, ...EMPTY_ARR].slice(0, EMPTY_ARR.length);
+	}
+	return retVal;
+}
+
+function updateStorage(urls: string[]) {
+	const old = LocalStorageService.getForKey(CARS_KEY);
+	let newVal = {...old};
+	for(const url of urls) {
+		if(!Object.keys(old).includes(url)) {
+			newVal[url] = '';
+		}
+	}
+	LocalStorageService.setForKey(CARS_KEY, newVal);
 }
