@@ -9,7 +9,7 @@ import {of} from 'rxjs/observable/of';
 import {SpinnerService} from './../services/spinner.service';
 import {GetCarDataAction, GetSuccessAction, GetFailedAction, GET_CAR_DATA, GetSavedCarDataAction} from './../actions';
 import {environment} from './../../environments/environment';
-import {GET_SAVED_CAR_DATA} from '../actions/car-data.actions';
+import {GET_SAVED_CAR_DATA, SAVE_CAR_DATA} from '../actions/car-data.actions';
 
 
 @Injectable()

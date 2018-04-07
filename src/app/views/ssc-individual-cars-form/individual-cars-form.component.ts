@@ -36,11 +36,6 @@ export class IndividualCarsFormComponent implements OnDestroy {
             })
 		);
 
-        this.subscription.add(this.store.select(selectAuth2).subscribe((auth2) => {
-            if(auth2.currentUser) {
-                const currentUser = auth2.currentUser.get();
-            }
-        }));
         this.subscription.add(
             spinnerService.subscribe(waiting => {
                 this.spinner = waiting;

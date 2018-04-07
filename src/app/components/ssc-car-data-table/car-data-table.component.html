@@ -1,37 +1,41 @@
-<table class="table-striped table-hover container" *ngIf="!!carData && carData.length > 0">
-    <thead>
-    <tr class="row">
-        <th class="col-md-3">Név & link</th>
-        <th class="col-md-1">Évjárat</th>
-        <th class="col-md-3">Ár</th>
-        <th class="col-md-2">Kilóméteróra állása</th>
-        <th class="col-md-2">Teljesítmény</th>
-        <th class="col-md-1">Érték</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let car of carData; let i=index;" class="row">
-        <td class="col-md-3">
-            <input type="text" *ngIf="editMode" [(ngModel)]="car.linkName">
-            <a href="{{car.CarUri}}" *ngIf="!editMode"><strong>{{car.linkName|| 'Link neve'}}</strong></a>
-            <i class="fa fa-edit float-right" *ngIf="!editMode" (click)="editMode = !editMode"></i>
-            <i class="fa fa-check-square float-right" *ngIf="editMode" (click)="editMode = !editMode"></i>
-        </td>
-        <td class="col-md-1">
-            {{car.prod_date}}
-        </td>
-        <td class="col-md-3">
-            {{car.price}}
-        </td>
-        <td class="col-md-2">
-            {{car.speedometer}}
-        </td>
-        <td class="col-md-2">
-            {{car.power}}
-        </td>
-        <td class="col-md-1">
-            {{car.worth}}
-        </td>
-    </tr>
-    </tbody>
-</table>
+<div class="container-fluid d-flex flex-column align-items-center">
+    <table class="table-striped table-hover container order-0" *ngIf="!!carData && carData.length > 0">
+        <thead>
+        <tr class="row">
+            <th class="col-md-3">Név & link</th>
+            <th class="col-md-1">Évjárat</th>
+            <th class="col-md-3">Ár</th>
+            <th class="col-md-2">Kilóméteróra állása</th>
+            <th class="col-md-2">Teljesítmény</th>
+            <th class="col-md-1">Érték</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let car of carData" class="row">
+            <td class="col-md-3">
+                <input type="text" *ngIf="editMode" [(ngModel)]="car.linkName">
+                <a href="{{car.CarUri}}" *ngIf="!editMode"><strong>{{car.linkName|| 'Link neve'}}</strong></a>
+                <i class="fa fa-edit float-right" *ngIf="!editMode" (click)="editMode = !editMode"></i>
+                <i class="fa fa-check-square float-right" *ngIf="editMode" (click)="editMode = !editMode"></i>
+            </td>
+            <td class="col-md-1">
+                {{car.prod_date}}
+            </td>
+            <td class="col-md-3">
+                {{car.price}}
+            </td>
+            <td class="col-md-2">
+                {{car.speedometer}}
+            </td>
+            <td class="col-md-2">
+                {{car.power}}
+            </td>
+            <td class="col-md-1">
+                {{car.worth}}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <input type="button" class="btn-dark order-1" *ngIf="isSignedIn" (click)="saveCarDetails()"
+           value="Táblázat mentése">
+</div>
