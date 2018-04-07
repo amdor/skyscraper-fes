@@ -25,8 +25,6 @@ export class GoogleAuthResolver implements Resolve<any> {
                     // making them global
                     this.auth2 = auth2;
                     this.store.dispatch(new AuthLoadedAction(this.auth2));
-                    const currentUser = auth2.currentUser.get();
-                    this.store.dispatch(new SignInStatusChange(currentUser.isSignedIn()));
                     this.auth2.isSignedIn.listen((isSignedIn) => {
                         this.store.dispatch(new SignInStatusChange(isSignedIn));
                     });

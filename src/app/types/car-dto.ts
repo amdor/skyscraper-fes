@@ -1,13 +1,11 @@
 export interface CarData {
     CarUri: string;
-    age: string;
-    condition: string;
-    mass: string;
+	prod_date: string;
     power: string;
     price: string;
     speedometer: string;
-    trunk: string;
     worth: number;
+	linkName?: string;
 }
 
 export interface RawCarData {
