@@ -8,6 +8,7 @@ import {AuthState} from '../../reducers/auth/auth.reducer';
 import {GetSavedCarDataAction} from '../../actions';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
+import 'rxjs/add/operator/distinctUntilChanged';
 
 
 @Component({
@@ -30,7 +31,7 @@ export class CarDataTableComponent implements OnDestroy, OnInit {
 			this.carData = carDataState.cars.sort((car1, car2) => car2.worth - car1.worth);
 			this.cdRef.detectChanges();
 		}));
-		this.subscription.add(this.store.select(selectAuthState).subscribe((authState: AuthState) => {
+		this.subscription.add(this.store.select(selectAuthState).distinctUntilChanged().subscribe((authState: AuthState) => {
 			if(authState.isSignedIn) {
 				this.store.dispatch(new GetSavedCarDataAction(authState.idToken));
 			}
