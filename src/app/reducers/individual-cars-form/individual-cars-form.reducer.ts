@@ -1,4 +1,4 @@
-import {CarFormActions, SET, REMOVE, SET_ALL} from './../../actions';
+import {CarFormActions, SET, SET_ALL} from './../../actions';
 import {CARS_KEY, LocalStorageService} from '../../services/local-storage.service';
 
 const EMPTY_ARR = new Array<string>(10).fill('');
@@ -17,10 +17,6 @@ export function individualCarsFormReducer(state = initialFormState, action: CarF
 	let newUrls: Array<string> = [...state.urls];
 	let newPrefetchedHtmls = {...state.prefetchedHtmls};
 	switch(action.type) {
-		case REMOVE: {
-			newUrls[action.index] = '';
-			break;
-		}
 		case SET: {
 			newUrls = [...state.urls];
 			newUrls[action.index] = action.url;

@@ -23,7 +23,6 @@ import {combineLatest} from 'rxjs/observable/combineLatest';
 export class IndividualCarsFormComponent implements OnDestroy {
     uris: string[];
     spinner = false;
-    private idToken = '';
     private subscription: Subscription = new Subscription();
     private readonly proxy = 'https://skyscraper-proxy.herokuapp.com';
     private prefetchedHtmls: any;
@@ -37,13 +36,6 @@ export class IndividualCarsFormComponent implements OnDestroy {
             })
 		);
 
-        this.subscription.add(this.store.select(selectAuth2).subscribe((auth2) => {
-            if(auth2.currentUser) {
-                const currentUser = auth2.currentUser.get();
-                const isSignedIn = currentUser.isSignedIn();
-                this.idToken = isSignedIn ? currentUser.getAuthResponse().id_token : '';
-            }
-        }));
         this.subscription.add(
             spinnerService.subscribe(waiting => {
                 this.spinner = waiting;

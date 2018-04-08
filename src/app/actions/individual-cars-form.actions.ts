@@ -2,7 +2,6 @@ import { Action } from '@ngrx/store';
 
 export const SET =                 '[Individual Cars Form] Set';
 export const SET_ALL =             '[Individual Cars Form] Set all';
-export const REMOVE =              '[Individual Cars Form] Remove';
 
 /**
  * Load Individual Cars Form Actions
@@ -19,12 +18,5 @@ export class SetAllAction implements Action {
     constructor(public urls: string[], public prefetchedHtmls: any) { }
 }
 
-export class RemoveAction implements Action {
-  readonly type = REMOVE;
-
-  constructor(public index: number) { }
-}
-
-export type CarFormActions = RemoveAction
-  | SetAction
+export type CarFormActions = SetAction
   | SetAllAction;
