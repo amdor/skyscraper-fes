@@ -2,7 +2,7 @@
  * Form for cars put in individually
  */
 import {Component, OnDestroy} from '@angular/core';
-import {AppState, selectAuth2} from '../../reducers';
+import {AppState, selectAuth2, selectIndividualCarHtmls, selectIndividualCarUrls} from '../../reducers';
 import {Store} from '@ngrx/store';
 import {Subscription} from 'rxjs/Subscription';
 import {GetCarDataAction, SetAction} from '../../actions';
@@ -12,6 +12,7 @@ import 'rxjs/add/observable/defer';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {RawCarData} from '../../types/car-dto';
 import {Observable} from 'rxjs/Observable';
+import {combineLatest} from 'rxjs/observable/combineLatest';
 
 
 @Component({
@@ -22,23 +23,19 @@ import {Observable} from 'rxjs/Observable';
 export class IndividualCarsFormComponent implements OnDestroy {
     uris: string[];
     spinner = false;
-    private idToken = '';
     private subscription: Subscription = new Subscription();
     private readonly proxy = 'https://skyscraper-proxy.herokuapp.com';
+    private prefetchedHtmls: any;
 
     constructor(private store: Store<AppState>, private spinnerService: SpinnerService, private http: HttpClient) {
-        store.select(state => state.individualCars.urls).take(1).subscribe((urls) => {
-                this.uris = urls;
-            }
-        );
+		this.subscription.add(
+			combineLatest(store.select(selectIndividualCarUrls), store.select(selectIndividualCarHtmls))
+				.subscribe(([urls, prefetchedHtmls]) => {
+                 this.uris = urls;
+                 this.prefetchedHtmls = prefetchedHtmls;
+            })
+		);
 
-        this.subscription.add(this.store.select(selectAuth2).subscribe((auth2) => {
-            if(auth2.currentUser) {
-                const currentUser = auth2.currentUser.get();
-                const isSignedIn = currentUser.isSignedIn();
-                this.idToken = isSignedIn ? currentUser.getAuthResponse().id_token : '';
-            }
-        }));
         this.subscription.add(
             spinnerService.subscribe(waiting => {
                 this.spinner = waiting;
@@ -61,10 +58,14 @@ export class IndividualCarsFormComponent implements OnDestroy {
             const rawCarData: RawCarData = {carUrls: [], htmls: {}};
             for(const uri of nonEmptyUris) {
                 rawCarData.carUrls.push(uri);
-                const html =  await this.getCarHtml(uri);
-                if(html) {
-                    rawCarData.htmls[uri] = html;
-                }
+                if(Object.keys(this.prefetchedHtmls).includes(uri)) {
+					rawCarData.htmls[uri] = this.prefetchedHtmls[uri];
+				} else {
+					const html =  await this.getCarHtml(uri);
+					if(html) {
+						rawCarData.htmls[uri] = html;
+					}
+				}
             }
             return rawCarData;
         }).take(1).subscribe((rawCarData: RawCarData) => {
