@@ -17,7 +17,7 @@ export function carDataTableReducer(state = initialCarDataState, action: CarData
             const localAction = action as GetSuccessAction;
             return {
                 ...state,
-                cars: localAction.carData
+                cars: localAction.carData || []
             };
         }
         case GET_FAILED: {
