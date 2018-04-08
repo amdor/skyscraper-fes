@@ -54,6 +54,7 @@ export class IndividualCarsFormComponent implements OnDestroy {
     getCarData() {
         this.spinnerService.setSpinner(true);
         const nonEmptyUris = this.uris.filter(uri => uri !== '');
+        // TODO: save uris to localstorage
         Observable.defer(async() => {
             const rawCarData: RawCarData = {carUrls: [], htmls: {}};
             for(const uri of nonEmptyUris) {
