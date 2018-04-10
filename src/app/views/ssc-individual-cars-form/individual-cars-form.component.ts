@@ -51,6 +51,11 @@ export class IndividualCarsFormComponent implements OnDestroy {
         this.store.dispatch(new SetAction(uri, index));
     }
 
+    removeUrl(url: string, index: number) {
+    	url = '';
+    	this.addNewUrl(url, index);
+	}
+
     getCarData() {
         this.spinnerService.setSpinner(true);
         const nonEmptyUris = this.uris.filter(uri => uri !== '');
