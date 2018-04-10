@@ -36,6 +36,6 @@
         </tr>
         </tbody>
     </table>
-    <input type="button" class="btn-dark order-1" *ngIf="isSignedIn" (click)="saveCarDetails()"
+    <input type="button" class="btn-dark order-1" *ngIf="isSignedIn && carData.length" (click)="saveCarDetails()"
            value="Táblázat mentése">
 </div>

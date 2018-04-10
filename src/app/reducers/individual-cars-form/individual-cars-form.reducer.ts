@@ -45,7 +45,7 @@ function getNewUrls(newUrls: string[], maxLength: number) {
 function getInitialUrls() {
 	const cars = LocalStorageService.getForKey(CARS_KEY);
 	const storageUrls = cars ? Object.keys(cars) : [];
-	let retVal = [];
+	let retVal = [...EMPTY_ARR];
 	if(storageUrls.length) {
 		retVal = [...storageUrls, ...EMPTY_ARR].slice(0, EMPTY_ARR.length);
 	}

@@ -31,7 +31,7 @@ export class CarDataTableComponent implements OnDestroy, OnInit {
 			this.cdRef.detectChanges();
 		}));
 		this.subscription.add(this.store.select(selectAuthState).subscribe((authState: AuthState) => {
-			if(authState.isSignedIn) {
+			if(authState.isSignedIn && !this.carData.length) {
 				this.store.dispatch(new GetSavedCarDataAction(authState.idToken));
 			}
 			this.idToken = authState.idToken || '';
