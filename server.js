@@ -12,7 +12,7 @@ const forceSSL = function() {
         next();
     }
 };
-ForceSSL middleware
+// ForceSSL middleware
 app.use(forceSSL());
 app.use(express.static(__dirname + '/dist'));
 app.listen(process.env.PORT || 8080);
