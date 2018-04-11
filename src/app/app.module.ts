@@ -22,6 +22,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {GoogleAuthResolver} from './resolvers';
 import {LocalStorageService} from './services/local-storage.service';
+import {SavedCarsComponent} from './views/ssc-saved-cars/saved-cars.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import {LocalStorageService} from './services/local-storage.service';
 		AppComponent,
 		CarDataTableComponent,
 		IndividualCarsFormComponent,
+		SavedCarsComponent,
 		SscNavbarComponent
 	],
 	imports: [
