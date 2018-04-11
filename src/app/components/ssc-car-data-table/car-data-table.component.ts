@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Subscription} from 'rxjs/Subscription';
 
@@ -16,24 +16,19 @@ import {environment} from '../../../environments/environment';
 	styleUrls: ['./car-data-table.component.scss']
 })
 export class CarDataTableComponent implements OnDestroy, OnInit {
+	@Input()
 	carData: CarData[] = [];
+
 	subscription = new Subscription();
 	editMode = false;
 	isSignedIn = false;
 	private idToken = '';
 
-	constructor(private store: Store<AppState>, private cdRef: ChangeDetectorRef, private http: HttpClient) {
+	constructor(private store: Store<AppState>, private http: HttpClient) {
 	}
 
 	ngOnInit() {
-		this.subscription.add(this.store.select(state => state.carData).subscribe((carDataState) => {
-			this.carData = carDataState.cars.sort((car1, car2) => car2.worth - car1.worth);
-			this.cdRef.detectChanges();
-		}));
 		this.subscription.add(this.store.select(selectAuthState).subscribe((authState: AuthState) => {
-			if(authState.isSignedIn && !this.carData.length) {
-				this.store.dispatch(new GetSavedCarDataAction(authState.idToken));
-			}
 			this.idToken = authState.idToken || '';
 			this.isSignedIn = authState.isSignedIn;
 		}))
