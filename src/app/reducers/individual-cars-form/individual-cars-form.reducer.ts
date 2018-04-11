@@ -10,7 +10,7 @@ export interface FormState {
 
 export const initialFormState: FormState = {
 	urls: getInitialUrls(),
-	prefetchedHtmls: LocalStorageService.getForKey(CARS_KEY)
+	prefetchedHtmls: LocalStorageService.getForKey(CARS_KEY) || {}
 };
 
 export function individualCarsFormReducer(state = initialFormState, action: CarFormActions): FormState {
@@ -53,8 +53,8 @@ function getInitialUrls() {
 }
 
 function updateStorage(urls: string[]) {
-	const old = LocalStorageService.getForKey(CARS_KEY);
-	let newVal = {};
+	const old = LocalStorageService.getForKey(CARS_KEY) || {};
+	const newVal = {};
 	for(const url of urls) {
 		if(Object.keys(old).includes(url)) {
 			newVal[url] = old[url];
