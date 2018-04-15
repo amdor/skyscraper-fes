@@ -2,3 +2,7 @@
   height: 3rem;
   width: 3rem;
 }
+
+.dropdown-toggle::after {
+  border-top-color: white;
+}

@@ -23,6 +23,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {GoogleAuthResolver} from './resolvers';
 import {LocalStorageService} from './services/local-storage.service';
 import {SavedCarsComponent} from './views/ssc-saved-cars/saved-cars.component';
+import {SscNotificationComponent} from './components/ssc-notification/ssc-notification.component';
+import {SscNotificationService} from './services/ssc-notification.service';
 
 
 @NgModule({
@@ -31,7 +33,8 @@ import {SavedCarsComponent} from './views/ssc-saved-cars/saved-cars.component';
 		CarDataTableComponent,
 		IndividualCarsFormComponent,
 		SavedCarsComponent,
-		SscNavbarComponent
+		SscNavbarComponent,
+		SscNotificationComponent
 	],
 	imports: [
 		BrowserModule,
@@ -49,6 +52,7 @@ import {SavedCarsComponent} from './views/ssc-saved-cars/saved-cars.component';
 	],
 	providers: [
 		LocalStorageService,
+		SscNotificationService,
 		SpinnerService,
 		GoogleAuthResolver,
 		{

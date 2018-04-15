@@ -1,0 +1,7 @@
+<ng-container *ngFor="let notification of displayedNotifications">
+    <ng-container [ngSwitch]="notification">
+        <div *ngSwitchCase="notificationTypes.SUCCESS" class="alert alert-success" role="alert">
+            Success!!
+        </div>
+    </ng-container>
+</ng-container>
