@@ -14,6 +14,18 @@
             <li class="nav-item">
                 <a class="nav-link border-light" routerLink="/faq" routerLinkActive="active">GYIK</a>
             </li>
+            <li class="nav-item">
+                <div ngbDropdown placement="bottom-left">
+                    <a ngbDropdownToggle id="languageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false" class="btn nav-link">
+                        <i class="fa fa-globe"></i>
+                    </a>
+                    <div ngbDropdownMenu aria-labelledby="languageDropdown">
+                        <button class="dropdown-item bg-light" (click)="languageSelectionChanged('hu')">hu</button>
+                        <button class="dropdown-item bg-light" (click)="languageSelectionChanged('en')">en</button>
+                    </div>
+                </div>
+            </li>
         </ul>
         <div class="ml-auto my-2 my-lg-0 mr-1" ngbDropdown placement="bottom-right">
             <a ngbDropdownToggle id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"

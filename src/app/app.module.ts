@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
 import {RouterModule} from '@angular/router';
@@ -23,7 +23,13 @@ import {SscNotificationComponent} from './components/ssc-notification/ssc-notifi
 import {SscNotificationService} from './services/ssc-notification.service';
 import {FaqComponent} from './views/ssc-faq/faq.component';
 import {MainComponent} from './views/ssc-main/main.component';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
+
+export function createTranslateLoader(http: HttpClient) {
+	return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
 	declarations: [
@@ -48,7 +54,14 @@ import {MainComponent} from './views/ssc-main/main.component';
 			carData: carDataTableReducer,
 			googleAuth: authReducer
 		}),
-		EffectsModule.forRoot([CarDataEffects])
+		EffectsModule.forRoot([CarDataEffects]),
+		TranslateModule.forRoot({
+			loader: {
+				provide: TranslateLoader,
+				useFactory: (createTranslateLoader),
+				deps: [HttpClient]
+			}
+		})
 	],
 	providers: [
 		LocalStorageService,
