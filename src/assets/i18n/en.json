@@ -1,3 +1,30 @@
 {
-  "HELLO": "works lol!"
+  "How does it work?": "How does it work?",
+  "faq_comp_plugin_answer": "With this Google Chrome plugin, it is easier and faster to collect cars of liking. The extension is available in Google store.",
+  "faq_comp_how_does_it_work_answer": "Collect and compare any cars found on the Internet. The only thing you need to do is pasting the URLs of the cars of preference into the main page's fields.",
+  "Is it safe to log in?": "Is it safe to log in?",
+  "Yes.": "Yes.",
+  "faq_comp_is_it_safe_login_answer":"The page uses Google authentication for login. As a result there is no username or password stored by this page. It only gets a random character sequence from Google and a confirmation of login. Only that character sequence is stored to identify the logged in user.",
+  "I see no data in the table, why?": "I see no data in the table, why?",
+  "faq_comp_why_no_data_answer": "Some car specs pages are technically not possible to analyze. This issue can be bypassed by using the Skyscraper Chrome extension.",
+  "Add to Chrome": "Add to Chrome",
+  "Already added": "Already added",
+
+  "individual_cars_help_message": "Paste your favorite cars' links. e.g..: https://hasznaltauto.hu/... or https://suchen.mobile.de/...",
+  "Compare": "Compare",
+  "Name & link": "Name & link",
+  "Production date": "Production date",
+  "Price": "Price",
+  "Mileage": "Mileage",
+  "Power": "Power",
+  "Worth": "Worth",
+  "Link name": "Link name",
+  "Save table": "Save table",
+
+  "Success!!": "Success!!",
+
+  "Saved cars": "Saved cars",
+  "FAQ": "FAQ",
+  "Logout": "Logout",
+  "Google login": "Google login"
 }

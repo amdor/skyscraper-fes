@@ -10,7 +10,7 @@ import {ROUTES} from './app.routes';
 import {AppComponent} from './app.component';
 import {CarDataTableComponent} from './components/ssc-car-data-table/car-data-table.component';
 import {IndividualCarsFormComponent} from './views/ssc-individual-cars-form/individual-cars-form.component';
-import {authReducer, carDataTableReducer, individualCarsFormReducer} from './reducers';
+import {authReducer, carDataTableReducer, individualCarsFormReducer, languageReducer} from './reducers';
 import {CarDataEffects} from './effects/car-data-effects';
 import {SpinnerService} from './services/spinner.service';
 import {SscNavbarComponent} from './components/ssc-navbar/ssc-navbar.component';
@@ -52,7 +52,8 @@ export function createTranslateLoader(http: HttpClient) {
 		StoreModule.forRoot({
 			individualCars: individualCarsFormReducer,
 			carData: carDataTableReducer,
-			googleAuth: authReducer
+			googleAuth: authReducer,
+			language: languageReducer
 		}),
 		EffectsModule.forRoot([CarDataEffects]),
 		TranslateModule.forRoot({

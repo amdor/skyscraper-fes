@@ -1,3 +1,31 @@
 {
-  "HELLO": "működik!"
+  "How does it work?": "Hogyan működik?",
+  "faq_comp_how_does_it_work_answer": "Az Interneten bárhol talált autó adatlapokat lehet itt összegyűjteni és összehasonlítani. Csak annyi kell hogy a kiválasztott autók URL-jét bemásold az egyik főoldalon lévő mezőbe. Ha megvan az összes autó amit szeretnél összehasonlítani, kattints az összehasonlítás gombra.",
+  "Is it safe to log in?": "Biztonságos bejelentkezni?",
+  "I see no data in the table, why?": "Miért nem látom az autó adatokat?",
+  "faq_comp_why_no_data_answer": "Technikai okokból nem lehetséges minden honlap kiértékelése. Ha a plugint használod, ez nem fordulhat elő.",
+  "faq_comp_plugin_answer": "Ezzel a Google Chrome böngésző kiegészítéssel egyszerűbb és gyorsabb összegyűjteni a szimpatikus autókat. A kiegészítés a Google saját store-jából tölthető le.",
+  "Add to Chrome": "Hozzáadás a Chrome-hoz",
+  "Already added": "Már hozzá lett adva",
+  "Yes.": "Igen.",
+  "faq_comp_is_it_safe_login_answer": "A bejelentkezéshez a Google bejelentkezési szolgáltatását használja az oldal. Ezen keresztül folyik az azonosítás, így ez a honlap nem tárol se felhasználóneveket, se jelszavakat. A Google-től egy véletlen karaktersorozatot kap az oldal és az információt, hogy sikeres a bejelentkezés. Mindessze ez van elmentve és felhasználva.",
+
+
+  "individual_cars_help_message": "Másolja be a kiszemelt autók adatlapjainak linkjét. Pl.: https://hasznaltauto.hu/... vagy https://suchen.mobile.de/...",
+  "Compare": "Összehasonlítás",
+  "Name & link": "Név & link",
+  "Production date": "Évjárat",
+  "Price": "Ár",
+  "Mileage": "Futott kilóméterek",
+  "Power": "Teljesítmény",
+  "Worth": "Érték",
+  "Link name": "Link neve",
+  "Save table": "Táblázat mentése",
+
+  "Success!!": "Siker!!",
+
+  "Saved cars": "Mentett autók",
+  "FAQ": "GYIK",
+  "Logout": "Kijelentkezés",
+  "Google login": "Google bejelentkezés"
 }

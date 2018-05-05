@@ -1,5 +1,5 @@
 import {CarDataActions, GET_FAILED, GET_CAR_DATA_SUCCESS} from './../../actions';
-import {GetSuccessAction} from '../../actions/car-data.actions';
+import {GetSuccessAction, RESET_SAVED_CAR_DATA, ResetSavedCarDataAction} from '../../actions/car-data.actions';
 import {CarData} from '../../types/car-dto';
 
 
@@ -23,6 +23,9 @@ export function carDataTableReducer(state = initialCarDataState, action: CarData
         case GET_FAILED: {
             console.error('Failed to get car data.');
             return state;
+        }
+        case RESET_SAVED_CAR_DATA: {
+            return initialCarDataState;
         }
         default:
             return state;

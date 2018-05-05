@@ -1,5 +1,5 @@
 <div class="offset-1 col-10">
-    <p class="bg-dark font-italic font-weight-bold mb-2 p-2 small text-center text-white">Másolja be a kiszemelt autók adatlapjainak linkjét. Pl.: https://hasznaltauto.hu/... vagy https://suchen.mobile.de/...</p>
+    <p class="bg-dark font-italic font-weight-bold mb-2 p-2 small text-center text-white">{{'individual_cars_help_message' | translate}}</p>
 </div>
 <div role="form" class="form" id="postForm">
     <div *ngFor="let uri of uris; let i=index; trackBy: trackByIndex">
@@ -17,7 +17,7 @@
     <div class="row">
         <div class="offset-1 col-10">
             <input class="btn btn-primary form-control" type="button"
-                   (click)="getCarData()" value="Összehasonlítás">
+                   (click)="getCarData()" value="{{'Compare' | translate}}">
         </div>
     </div>
 </div>

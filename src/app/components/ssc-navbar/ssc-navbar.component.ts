@@ -3,7 +3,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {Store} from '@ngrx/store';
 import {AppState, selectAuth2, selectIsSignedIn} from '../../reducers/index';
 import {AuthLoadedAction} from '../../actions/auth.actions';
-import {TranslateService} from '@ngx-translate/core';
+import {SetLanguageAction} from '../../actions/language.actions';
 
 
 @Component({
@@ -18,8 +18,7 @@ export class SscNavbarComponent implements OnDestroy, OnInit {
 	isSignedIn = false;
 	subscription: Subscription = new Subscription;
 
-	constructor(private store: Store<AppState>, private cdRef: ChangeDetectorRef,
-				private translate: TranslateService) {
+	constructor(private store: Store<AppState>, private cdRef: ChangeDetectorRef) {
 	}
 
 	ngOnInit() {
@@ -49,6 +48,7 @@ export class SscNavbarComponent implements OnDestroy, OnInit {
 		this.auth2.signIn(options).then(
 			(googleUser) => {
 				this.profile = googleUser.getBasicProfile();
+				this.store.dispatch(new AuthLoadedAction(this.auth2));
 			},
 			(error) => {
 				console.error(error);
@@ -63,7 +63,7 @@ export class SscNavbarComponent implements OnDestroy, OnInit {
 	}
 
 	languageSelectionChanged(newVal: string) {
-		this.translate.use(newVal);
+		this.store.dispatch(new SetLanguageAction(newVal));
 	}
 
 }
