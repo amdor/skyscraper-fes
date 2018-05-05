@@ -5,9 +5,10 @@ import {Subscription} from 'rxjs/Subscription';
 import {AppState, selectAuthState} from './../../reducers';
 import {CarData} from '../../types/car-dto';
 import {AuthState} from '../../reducers/auth/auth.reducer';
-import {GetSavedCarDataAction} from '../../actions';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
+import {SscNotificationService} from '../../services/ssc-notification.service';
+import {NotificationType} from '../ssc-notification/ssc-notification.component';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class CarDataTableComponent implements OnDestroy, OnInit {
 	isSignedIn = false;
 	private idToken = '';
 
-	constructor(private store: Store<AppState>, private http: HttpClient) {
+	constructor(private store: Store<AppState>, private http: HttpClient, private notificationService: SscNotificationService) {
 	}
 
 	ngOnInit() {
@@ -41,6 +42,6 @@ export class CarDataTableComponent implements OnDestroy, OnInit {
 	saveCarDetails() {
 		this.http.put(environment.savedCarsEndpoint, {idToken: this.idToken, carData: this.carData})
 			.take(1)
-			.subscribe(()=>{console.log('Success');}, (err) =>{console.error(err.toString());})
+			.subscribe(()=>{this.notificationService.showNotification(NotificationType.SUCCESS)}, (err) =>{console.error(err.toString());})
 	}
 }

@@ -2,16 +2,18 @@
 /**
  * Form for cars put in individually
  */
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
-import {AppState, selectAuthState} from '../../reducers';
+import {ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit} from '@angular/core';
+import {AppState, selectAuthState, selectIsSignedIn} from '../../reducers';
 import {Store} from '@ngrx/store';
 import {Subscription} from 'rxjs/Subscription';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/observable/defer';
-import {HttpClient} from '@angular/common/http';
 import {CarData} from '../../types/car-dto';
 import {GetSavedCarDataAction} from '../../actions';
 import {AuthState} from '../../reducers/auth/auth.reducer';
+import 'rxjs/add/operator/distinctUntilChanged';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ResetSavedCarDataAction} from '../../actions/car-data.actions';
 
 
 @Component({
@@ -24,8 +26,9 @@ export class SavedCarsComponent implements OnDestroy, OnInit {
 	carData: CarData[] = [];
 	private subscription: Subscription = new Subscription();
 
-	constructor(private store: Store<AppState>, private http: HttpClient,
-				private cdRef: ChangeDetectorRef) {	}
+	constructor(private store: Store<AppState>, private cdRef: ChangeDetectorRef,
+				private router: Router, private route: ActivatedRoute, private zone: NgZone) {
+	}
 
 	ngOnInit() {
 		this.subscription.add(this.store.select(state => state.carData).subscribe((carDataState) => {
@@ -36,6 +39,12 @@ export class SavedCarsComponent implements OnDestroy, OnInit {
 		this.subscription.add(this.store.select(selectAuthState).subscribe((authState: AuthState) => {
 			if(authState.idToken) {
 				this.store.dispatch(new GetSavedCarDataAction(authState.idToken));
+			}
+		}));
+		this.subscription.add(this.store.select(selectIsSignedIn).distinctUntilChanged().subscribe((isSignedIn: boolean) => {
+			if(!isSignedIn) {
+				this.store.dispatch(new ResetSavedCarDataAction());
+				this.zone.run(() => this.router.navigate(['../'], {relativeTo: this.route}));
 			}
 		}));
 	}

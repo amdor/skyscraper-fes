@@ -68,12 +68,11 @@ export class IndividualCarsFormComponent implements OnDestroy, OnInit {
 	getCarData() {
 		this.spinnerService.setSpinner(true);
 		const nonEmptyUris = this.uris.filter(uri => uri !== '');
-		// TODO: save uris to localstorage
 		Observable.defer(async() => {
 			const rawCarData: RawCarData = {carUrls: [], htmls: {}};
 			for(const uri of nonEmptyUris) {
 				rawCarData.carUrls.push(uri);
-				if(Object.keys(this.prefetchedHtmls).includes(uri)) {
+				if(this.prefetchedHtmls[uri]) {
 					rawCarData.htmls[uri] = this.prefetchedHtmls[uri];
 				} else {
 					const html = await this.getCarHtml(uri);

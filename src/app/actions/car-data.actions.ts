@@ -6,6 +6,7 @@ export const GET_SAVED_CAR_DATA = '[Car Data] Get Saved Car Data';
 export const SAVE_CAR_DATA = '[Car Data] Save Car Data';
 export const GET_CAR_DATA_SUCCESS = '[Car Data] Get Car Data Success';
 export const GET_FAILED = '[Car Data] Get Failed';
+export const RESET_SAVED_CAR_DATA = '[Car Data] Reset saved car data';
 
 /**
  * Load Individual Cars Form Actions
@@ -45,7 +46,15 @@ export class GetFailedAction implements Action {
 	}
 }
 
+export class ResetSavedCarDataAction implements Action {
+	readonly type = RESET_SAVED_CAR_DATA;
+
+	constructor() {
+	}
+}
+
 export type CarDataActions = GetCarDataAction
 	| GetSavedCarDataAction
 	| GetSuccessAction
-	| GetFailedAction;
+	| GetFailedAction
+	| ResetSavedCarDataAction;

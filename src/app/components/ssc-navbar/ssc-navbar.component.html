@@ -1,6 +1,6 @@
 <!--Navbar-->
 <nav class="navbar sticky-top navbar-dark bg-dark navbar-expand-md mx-3 my-4 rounded">
-    <a class="navbar-brand" href="/#">Skyscraper</a>
+    <a class="navbar-brand" routerLink="/" routerLinkActive="active">Skyscraper</a>
     <button type="button" class="navbar-toggler" data-toggle="collapse"
             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
             [attr.aria-expanded]="!isCollapsed" (click)="isCollapsed = !isCollapsed">
@@ -8,18 +8,33 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isCollapsed">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item" *ngIf="isSignedIn">
+                <a class="nav-link border-light" routerLink="/saved" routerLinkActive="active">{{'Saved cars' | translate}}</a>
+            </li>
             <li class="nav-item">
-                <a class="nav-link" href="/saved">Mentett autók</a>
+                <a class="nav-link border-light" routerLink="/faq" routerLinkActive="active">{{'FAQ' | translate}}</a>
+            </li>
+            <li class="nav-item">
+                <div ngbDropdown placement="bottom-left">
+                    <a ngbDropdownToggle id="languageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false" class="btn nav-link">
+                        <i class="fa fa-globe"></i>
+                    </a>
+                    <div ngbDropdownMenu aria-labelledby="languageDropdown">
+                        <button class="dropdown-item bg-light" (click)="languageSelectionChanged('hu')">hu</button>
+                        <button class="dropdown-item bg-light" (click)="languageSelectionChanged('en')">en</button>
+                    </div>
+                </div>
             </li>
         </ul>
         <div class="ml-auto my-2 my-lg-0 mr-1" ngbDropdown placement="bottom-right">
-            <a ngbDropdownToggle href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+            <a ngbDropdownToggle id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                aria-expanded="false" class="float-right">
                 <img [src]="isSignedIn ? profile.getImageUrl() : 'favicon.png'" class="rounded-circle">
             </a>
             <div ngbDropdownMenu aria-labelledby="navbarDropdown">
-                <a *ngIf="isSignedIn"  class="dropdown-item" href="#" (click)="logout()">Logout</a>
-                <a *ngIf="!isSignedIn"  class="dropdown-item" href="#" (click)="login()">Google login</a>
+                <button *ngIf="isSignedIn"  class="dropdown-item" href="#" (click)="logout()">{{'Logout' | translate}}</button>
+                <button *ngIf="!isSignedIn"  class="dropdown-item" href="#" (click)="login()">{{'Google login' | translate}} </button>
             </div>
         </div>
     </div>

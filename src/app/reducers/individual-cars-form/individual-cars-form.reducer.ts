@@ -55,7 +55,7 @@ function getInitialUrls() {
 function updateStorage(urls: string[]) {
 	const old = LocalStorageService.getForKey(CARS_KEY) || {};
 	const newVal = {};
-	for(const url of urls) {
+	for(const url of urls.filter(url => !!url)) {
 		if(Object.keys(old).includes(url)) {
 			newVal[url] = old[url];
 		} else {
