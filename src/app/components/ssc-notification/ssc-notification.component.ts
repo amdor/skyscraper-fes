@@ -1,8 +1,7 @@
 import {ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
 import {SscNotificationService} from '../../services/ssc-notification.service';
-import {Subscription} from 'rxjs/Subscription';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/observable/timer';
+import {Subscription, Observable} from 'rxjs';
+
 
 export enum NotificationType {
 	SUCCESS = 'alert-success'

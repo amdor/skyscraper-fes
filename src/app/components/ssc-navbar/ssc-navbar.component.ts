@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
 import {Store} from '@ngrx/store';
 import {AppState, selectAuth2, selectIsSignedIn} from '../../reducers/index';
 import {AuthLoadedAction} from '../../actions/auth.actions';

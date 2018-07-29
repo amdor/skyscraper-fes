@@ -5,13 +5,13 @@
 import {ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit} from '@angular/core';
 import {AppState, selectAuthState, selectIsSignedIn} from '../../reducers';
 import {Store} from '@ngrx/store';
-import {Subscription} from 'rxjs/Subscription';
-import 'rxjs/add/operator/take';
-import 'rxjs/add/observable/defer';
+import {Subscription} from 'rxjs';
+
+
 import {CarData} from '../../types/car-dto';
 import {GetSavedCarDataAction} from '../../actions';
 import {AuthState} from '../../reducers/auth/auth.reducer';
-import 'rxjs/add/operator/distinctUntilChanged';
+
 import {ActivatedRoute, Router} from '@angular/router';
 import {ResetSavedCarDataAction} from '../../actions/car-data.actions';
 

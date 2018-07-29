@@ -4,15 +4,13 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {AppState, selectAuth2, selectIndividualCarHtmls, selectIndividualCarUrls} from '../../reducers';
 import {Store} from '@ngrx/store';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription, Observable, combineLatest} from 'rxjs';
 import {GetCarDataAction, SetAction} from '../../actions';
 import {SpinnerService} from '../../services/spinner.service';
-import 'rxjs/add/operator/take';
-import 'rxjs/add/observable/defer';
+
+
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {CarData, RawCarData} from '../../types/car-dto';
-import {Observable} from 'rxjs/Observable';
-import {combineLatest} from 'rxjs/observable/combineLatest';
 
 
 @Component({

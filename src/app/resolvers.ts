@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {AppState} from './reducers/index';
 import {Store} from '@ngrx/store';
 import {AuthLoadedAction, SignInStatusChange} from './actions';
