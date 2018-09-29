@@ -1,5 +1,5 @@
-import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Store} from '@ngrx/store';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {select, Store} from '@ngrx/store';
 import {Subscription} from 'rxjs';
 
 import {AppState, selectAuthState} from './../../reducers';
@@ -9,6 +9,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {SscNotificationService} from '../../services/ssc-notification.service';
 import {NotificationType} from '../ssc-notification/ssc-notification.component';
+import {take} from 'rxjs/operators';
 
 
 @Component({
@@ -29,10 +30,10 @@ export class CarDataTableComponent implements OnDestroy, OnInit {
 	}
 
 	ngOnInit() {
-		this.subscription.add(this.store.select(selectAuthState).subscribe((authState: AuthState) => {
+		this.subscription.add(this.store.pipe(select(selectAuthState)).subscribe((authState: AuthState) => {
 			this.idToken = authState.idToken || '';
 			this.isSignedIn = authState.isSignedIn;
-		}))
+		}));
 	}
 
 	ngOnDestroy(): void {
@@ -40,8 +41,12 @@ export class CarDataTableComponent implements OnDestroy, OnInit {
 	}
 
 	saveCarDetails() {
-		this.http.put(environment.savedCarsEndpoint, {idToken: this.idToken, carData: this.carData})
-			.take(1)
-			.subscribe(()=>{this.notificationService.showNotification(NotificationType.SUCCESS)}, (err) =>{console.error(err.toString());})
+		this.http.put(environment.savedCarsEndpoint, {idToken: this.idToken, carData: this.carData}).pipe(
+			take(1))
+			.subscribe(() => {
+				this.notificationService.showNotification(NotificationType.SUCCESS);
+			}, (err) => {
+				console.error(err.toString());
+			});
 	}
 }

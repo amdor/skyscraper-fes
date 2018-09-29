@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "skyscraper5": {
+    "skyscraper6": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -61,21 +61,21 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "skyscraper5:build"
+            "browserTarget": "skyscraper6:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "skyscraper5:build:production"
+              "browserTarget": "skyscraper6:build:production"
             },
             "dev": {
-              "browserTarget": "skyscraper5:build:dev"
+              "browserTarget": "skyscraper6:build:dev"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "skyscraper5:build"
+            "browserTarget": "skyscraper6:build"
           }
         },
         "test": {
@@ -109,7 +109,7 @@
         }
       }
     },
-    "skyscraper5-e2e": {
+    "skyscraper6-e2e": {
       "root": "e2e",
       "sourceRoot": "e2e",
       "projectType": "application",
@@ -118,7 +118,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "skyscraper5:serve"
+            "devServerTarget": "skyscraper6:serve"
           }
         },
         "lint": {
@@ -133,14 +133,14 @@
       }
     }
   },
-  "defaultProject": "skyscraper5",
+  "defaultProject": "skyscraper6",
   "schematics": {
     "@schematics/angular:component": {
-      "prefix": "app",
+      "prefix": "ssc",
       "styleext": "css"
     },
     "@schematics/angular:directive": {
-      "prefix": "app"
+      "prefix": "ssc"
     }
   }
 }

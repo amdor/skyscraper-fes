@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
 import {SscNotificationService} from '../../services/ssc-notification.service';
-import {Subscription, Observable} from 'rxjs';
+import {Subscription, timer} from 'rxjs';
 
 
 export enum NotificationType {
@@ -30,7 +30,7 @@ export class SscNotificationComponent implements OnDestroy {
 	private popupNotification(type: NotificationType) {
 		this.displayedNotifications.push(type);
 		this.cdRef.detectChanges();
-		Observable.timer(2000).subscribe(() => {
+		timer(2000).subscribe(() => {
 			this.displayedNotifications.splice(this.displayedNotifications.indexOf(type), 1);
 			this.cdRef.detectChanges();
 		});

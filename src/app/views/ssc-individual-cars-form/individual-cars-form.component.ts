@@ -2,15 +2,16 @@
  * Form for cars put in individually
  */
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
-import {AppState, selectAuth2, selectIndividualCarHtmls, selectIndividualCarUrls} from '../../reducers';
-import {Store} from '@ngrx/store';
-import {Subscription, Observable, combineLatest} from 'rxjs';
+import {AppState, selectIndividualCarHtmls, selectIndividualCarUrls} from '../../reducers';
+import {select, Store} from '@ngrx/store';
+import {combineLatest, defer, Subscription} from 'rxjs';
 import {GetCarDataAction, SetAction} from '../../actions';
 import {SpinnerService} from '../../services/spinner.service';
 
 
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {CarData, RawCarData} from '../../types/car-dto';
+import {take} from 'rxjs/operators';
 
 
 @Component({
@@ -29,7 +30,7 @@ export class IndividualCarsFormComponent implements OnDestroy, OnInit {
 	constructor(private store: Store<AppState>, private spinnerService: SpinnerService, private http: HttpClient,
 				private cdRef: ChangeDetectorRef) {
 		this.subscription.add(
-			combineLatest(store.select(selectIndividualCarUrls), store.select(selectIndividualCarHtmls))
+			combineLatest(store.pipe(select(selectIndividualCarUrls)), store.pipe(select(selectIndividualCarHtmls)))
 				.subscribe(([urls, prefetchedHtmls]) => {
 					this.uris = urls;
 					this.prefetchedHtmls = prefetchedHtmls;
@@ -44,7 +45,7 @@ export class IndividualCarsFormComponent implements OnDestroy, OnInit {
 	}
 
 	ngOnInit() {
-		this.subscription.add(this.store.select(state => state.carData).subscribe((carDataState) => {
+		this.subscription.add(this.store.pipe(select(state => state.carData)).subscribe((carDataState) => {
 			this.carData = carDataState.cars.sort((car1, car2) => car2.worth - car1.worth);
 			this.cdRef.detectChanges();
 		}));
@@ -66,7 +67,7 @@ export class IndividualCarsFormComponent implements OnDestroy, OnInit {
 	getCarData() {
 		this.spinnerService.setSpinner(true);
 		const nonEmptyUris = this.uris.filter(uri => uri !== '');
-		Observable.defer(async() => {
+		defer(async() => {
 			const rawCarData: RawCarData = {carUrls: [], htmls: {}};
 			for(const uri of nonEmptyUris) {
 				rawCarData.carUrls.push(uri);
@@ -80,7 +81,7 @@ export class IndividualCarsFormComponent implements OnDestroy, OnInit {
 				}
 			}
 			return rawCarData;
-		}).take(1).subscribe((rawCarData: RawCarData) => {
+		}).pipe(take(1)).subscribe((rawCarData: RawCarData) => {
 			this.store.dispatch(new GetCarDataAction(rawCarData));
 		});
 	}
