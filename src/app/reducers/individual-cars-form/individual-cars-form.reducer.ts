@@ -16,7 +16,7 @@ export const initialFormState: FormState = {
 export function individualCarsFormReducer(state = initialFormState, action: CarFormActions): FormState {
 	let newUrls: Array<string> = [...state.urls];
 	let newPrefetchedHtmls = {...state.prefetchedHtmls};
-	switch(action.type) {
+	switch (action.type) {
 		case SET: {
 			newUrls = [...state.urls];
 			newUrls[action.index] = action.url;
@@ -46,7 +46,7 @@ function getInitialUrls() {
 	const cars = LocalStorageService.getForKey(CARS_KEY);
 	const storageUrls = cars ? Object.keys(cars) : [];
 	let retVal = [...EMPTY_ARR];
-	if(storageUrls.length) {
+	if (storageUrls.length) {
 		retVal = [...storageUrls, ...EMPTY_ARR].slice(0, EMPTY_ARR.length);
 	}
 	return retVal;
@@ -55,8 +55,8 @@ function getInitialUrls() {
 function updateStorage(urls: string[]) {
 	const old = LocalStorageService.getForKey(CARS_KEY) || {};
 	const newVal = {};
-	for(const url of urls.filter(url => !!url)) {
-		if(Object.keys(old).includes(url)) {
+	for (const url of urls.filter(elem => !!elem)) {
+		if (Object.keys(old).includes(url)) {
 			newVal[url] = old[url];
 		} else {
 			newVal[url] = '';

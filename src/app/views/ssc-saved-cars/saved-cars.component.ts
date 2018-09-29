@@ -4,16 +4,17 @@
  */
 import {ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit} from '@angular/core';
 import {AppState, selectAuthState, selectIsSignedIn} from '../../reducers';
-import {Store} from '@ngrx/store';
-import {Subscription} from 'rxjs/Subscription';
-import 'rxjs/add/operator/take';
-import 'rxjs/add/observable/defer';
+import {select, Store} from '@ngrx/store';
+import {Subscription} from 'rxjs';
+
+
 import {CarData} from '../../types/car-dto';
 import {GetSavedCarDataAction} from '../../actions';
 import {AuthState} from '../../reducers/auth/auth.reducer';
-import 'rxjs/add/operator/distinctUntilChanged';
+
 import {ActivatedRoute, Router} from '@angular/router';
 import {ResetSavedCarDataAction} from '../../actions/car-data.actions';
+import {distinctUntilChanged} from 'rxjs/operators';
 
 
 @Component({
@@ -31,18 +32,18 @@ export class SavedCarsComponent implements OnDestroy, OnInit {
 	}
 
 	ngOnInit() {
-		this.subscription.add(this.store.select(state => state.carData).subscribe((carDataState) => {
+		this.subscription.add(this.store.pipe(select(state => state.carData)).subscribe((carDataState) => {
 			this.carData = carDataState.cars.sort((car1, car2) => car2.worth - car1.worth);
 			this.spinner = !this.carData.length;
 			this.cdRef.detectChanges();
 		}));
-		this.subscription.add(this.store.select(selectAuthState).subscribe((authState: AuthState) => {
-			if(authState.idToken) {
+		this.subscription.add(this.store.pipe(select(selectAuthState)).subscribe((authState: AuthState) => {
+			if (authState.idToken) {
 				this.store.dispatch(new GetSavedCarDataAction(authState.idToken));
 			}
 		}));
-		this.subscription.add(this.store.select(selectIsSignedIn).distinctUntilChanged().subscribe((isSignedIn: boolean) => {
-			if(!isSignedIn) {
+		this.subscription.add(this.store.pipe(select(selectIsSignedIn), distinctUntilChanged()).subscribe((isSignedIn: boolean) => {
+			if (!isSignedIn) {
 				this.store.dispatch(new ResetSavedCarDataAction());
 				this.zone.run(() => this.router.navigate(['../'], {relativeTo: this.route}));
 			}

@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {Store} from '@ngrx/store';
+import {select, Store} from '@ngrx/store';
 import {AppState} from './reducers';
 import {SetLanguageAction} from './actions/language.actions';
 
 @Component({
-	selector: 'app-root',
+	selector: 'ssc-app-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.css']
 })
@@ -37,7 +37,7 @@ export class AppComponent {
 		}
 
 		// the lang to use, if the lang isn't available, it will use the current loader to get them
-		this.store.select((state: AppState) => state.language).subscribe((newLang: string) => {
+		this.store.pipe(select((state: AppState) => state.language)).subscribe((newLang: string) => {
 			translate.use(newLang);
 		});
 	}
