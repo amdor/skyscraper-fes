@@ -1,6 +1,6 @@
-# Fes4
+# Fes6
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.7.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.1.
 
 ## Development server
 

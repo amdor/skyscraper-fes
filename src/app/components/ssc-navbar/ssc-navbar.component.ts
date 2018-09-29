@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from 'rxjs/Subscription';
-import {Store} from '@ngrx/store';
+import {Subscription} from 'rxjs';
+import {select, Store} from '@ngrx/store';
 import {AppState, selectAuth2, selectIsSignedIn} from '../../reducers/index';
 import {AuthLoadedAction} from '../../actions/auth.actions';
 import {SetLanguageAction} from '../../actions/language.actions';
@@ -22,7 +22,7 @@ export class SscNavbarComponent implements OnDestroy, OnInit {
 	}
 
 	ngOnInit() {
-		this.subscription.add(this.store.select(selectAuth2).subscribe((auth2) => {
+		this.subscription.add(this.store.pipe(select(selectAuth2)).subscribe((auth2) => {
 			if(auth2.currentUser) {
 				this.auth2 = auth2;
 				this.isSignedIn = this.auth2.currentUser.get().isSignedIn();
@@ -30,7 +30,7 @@ export class SscNavbarComponent implements OnDestroy, OnInit {
 				this.cdRef.detectChanges();
 			}
 		}));
-		this.subscription.add(this.store.select(selectIsSignedIn).subscribe(isSignedIn => {
+		this.subscription.add(this.store.pipe(select(selectIsSignedIn)).subscribe(isSignedIn => {
 			this.isSignedIn = isSignedIn;
 			this.cdRef.detectChanges();
 		}));
