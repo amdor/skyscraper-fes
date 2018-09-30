@@ -1,15 +1,18 @@
 import {Action} from '@ngrx/store';
+import {User} from 'firebase/auth';
 
-export const AUTH_LOADED = '[Auth] Auth loaded';
+export const USER_LOADED = '[Auth] User loaded';
 export const AUTH_SIGN_IN_STATUS_CHANGED = '[Auth] Sign in status changed';
+export const AUTH_SIGN_IN = '[Auth] Sign in';
+export const AUTH_SIGN_OUT = '[Auth] Sign out';
 
 /**
  *  Authentication actions
  */
-export class AuthLoadedAction implements Action {
-	readonly type = AUTH_LOADED;
+export class UserLoadedAction implements Action {
+	readonly type = USER_LOADED;
 
-	constructor(public auth2: any) {
+	constructor(public user: User) {
 	}
 
 }
@@ -17,9 +20,24 @@ export class AuthLoadedAction implements Action {
 export class SignInStatusChange implements Action {
 	readonly type = AUTH_SIGN_IN_STATUS_CHANGED;
 
-	constructor(public isSignedIn: boolean) {
+	constructor(public user: User, public isSignedIn: boolean) {
 	}
 }
 
-export type AuthActions = AuthLoadedAction
-	| SignInStatusChange;
+export class SignInAction implements Action {
+	readonly type = AUTH_SIGN_IN;
+
+	constructor() {
+	}
+}
+
+export class SignOutAction implements Action {
+	readonly type = AUTH_SIGN_OUT;
+
+	constructor() {
+	}
+}
+
+export type AuthActions = UserLoadedAction
+	| SignInStatusChange
+	| SignInAction;

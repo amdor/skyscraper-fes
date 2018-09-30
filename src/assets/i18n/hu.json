@@ -23,9 +23,11 @@
   "Save table": "Táblázat mentése",
 
   "Success!!": "Siker!!",
+  "Failure": "Hiba",
 
   "Saved cars": "Mentett autók",
   "FAQ": "GYIK",
   "Logout": "Kijelentkezés",
-  "Google login": "Google bejelentkezés"
+  "Google login": "Google bejelentkezés",
+  "Login": "Bejelentkezés"
 }

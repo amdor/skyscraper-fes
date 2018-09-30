@@ -11,7 +11,7 @@ import {AppComponent} from './app.component';
 import {CarDataTableComponent} from './components/ssc-car-data-table/car-data-table.component';
 import {IndividualCarsFormComponent} from './views/ssc-individual-cars-form/individual-cars-form.component';
 import {authReducer, carDataTableReducer, individualCarsFormReducer, languageReducer} from './reducers';
-import {CarDataEffects} from './effects/car-data-effects';
+import {CarDataEffects} from './effects/car-data.effects';
 import {SpinnerService} from './services/spinner.service';
 import {SscNavbarComponent} from './components/ssc-navbar/ssc-navbar.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -25,6 +25,10 @@ import {FaqComponent} from './views/ssc-faq/faq.component';
 import {MainComponent} from './views/ssc-main/main.component';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../environments/environment';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import {AuthEffects} from './effects/auth.effects';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -47,7 +51,7 @@ export function createTranslateLoader(http: HttpClient) {
 		BrowserAnimationsModule,
 		FormsModule,
 		HttpClientModule,
-		NgbModule.forRoot(),
+		NgbModule,
 		RouterModule.forRoot(ROUTES),
 		StoreModule.forRoot({
 			individualCars: individualCarsFormReducer,
@@ -55,14 +59,16 @@ export function createTranslateLoader(http: HttpClient) {
 			googleAuth: authReducer,
 			language: languageReducer
 		}),
-		EffectsModule.forRoot([CarDataEffects]),
+		EffectsModule.forRoot([CarDataEffects, AuthEffects]),
 		TranslateModule.forRoot({
 			loader: {
 				provide: TranslateLoader,
 				useFactory: (createTranslateLoader),
 				deps: [HttpClient]
 			}
-		})
+		}),
+		AngularFireModule.initializeApp(environment.firebase, 'skyscraper-web'),
+		AngularFireAuthModule
 	],
 	providers: [
 		LocalStorageService,
@@ -72,7 +78,7 @@ export function createTranslateLoader(http: HttpClient) {
 		{
 			provide: APP_INITIALIZER,
 			useFactory: (lss: LocalStorageService) => () => {
-				return lss
+				return lss;
 			},
 			deps: [LocalStorageService],
 			multi: true

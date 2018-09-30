@@ -22,9 +22,11 @@
   "Save table": "Save table",
 
   "Success!!": "Success!!",
+  "Failure": "Failure",
 
   "Saved cars": "Saved cars",
   "FAQ": "FAQ",
   "Logout": "Logout",
-  "Google login": "Google login"
+  "Google login": "Google login",
+  "Login": "Login"
 }
