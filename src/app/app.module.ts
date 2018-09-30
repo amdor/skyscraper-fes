@@ -29,6 +29,7 @@ import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AuthEffects} from './effects/auth.effects';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -68,7 +69,8 @@ export function createTranslateLoader(http: HttpClient) {
 			}
 		}),
 		AngularFireModule.initializeApp(environment.firebase, 'skyscraper-web'),
-		AngularFireAuthModule
+		AngularFireAuthModule,
+		AngularFirestoreModule
 	],
 	providers: [
 		LocalStorageService,

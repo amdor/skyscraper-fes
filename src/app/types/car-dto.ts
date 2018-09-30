@@ -6,6 +6,7 @@ export interface CarData {
 	speedometer: string;
 	worth: number;
 	linkName?: string;
+	id?: string;
 }
 
 export interface RawCarData {
