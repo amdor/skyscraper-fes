@@ -12,12 +12,12 @@ export {CarDataState} from './car-data-table/car-data-table.reducer';
 export interface AppState {
 	individualCars: FormState;
 	carData: CarDataState;
-	googleAuth: AuthState;
+	auth: AuthState;
 	language: string;
 }
 
 
-export const selectAuthState = (state: AppState) => state.googleAuth;
+export const selectAuthState = (state: AppState) => state.auth;
 export const selectIsSignedIn = createSelector(selectAuthState, (state: AuthState) => state.isSignedIn);
 export const selectUser = createSelector(selectAuthState, (state: AuthState) => state.user);
 

@@ -11,6 +11,7 @@ export const initialCarDataState: CarDataState = {
 	cars: []
 };
 
+// TODO: when showing notification for save car data, update i18n files with translation
 export function carDataTableReducer(state = initialCarDataState, action: CarDataActions): CarDataState {
 	switch (action.type) {
 		case GET_CAR_DATA_SUCCESS: {

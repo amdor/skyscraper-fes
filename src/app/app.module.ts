@@ -57,7 +57,7 @@ export function createTranslateLoader(http: HttpClient) {
 		StoreModule.forRoot({
 			individualCars: individualCarsFormReducer,
 			carData: carDataTableReducer,
-			googleAuth: authReducer,
+			auth: authReducer,
 			language: languageReducer
 		}),
 		EffectsModule.forRoot([CarDataEffects, AuthEffects]),

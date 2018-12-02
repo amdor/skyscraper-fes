@@ -1,0 +1,25 @@
+import {Injectable} from '@angular/core';
+import {AngularFirestore, CollectionReference} from '@angular/fire/firestore';
+import {environment} from '../../environments/environment';
+import {User} from 'firebase';
+import {Observable} from 'rxjs';
+import {SscUser} from '../types/ssc-user-dto';
+import {AngularFirestoreCollection} from '@angular/fire/firestore/collection/collection';
+import {CarData} from '../types/car-dto';
+
+
+@Injectable()
+export class SscDataService {
+	constructor(private afs: AngularFirestore) {
+	}
+
+	public getUserCarGroup(user: User): Observable<SscUser> {
+		return this.afs.collection(environment.userCollection).doc(user.uid).valueChanges();
+	}
+
+	public getSavedCarDataByCarGroup(carGroup: number): AngularFirestoreCollection<CarData[]> {
+		return this.afs.collection(environment.carDataCollection, (ref: CollectionReference) => {
+			return ref.where('carGroup', '==', carGroup);
+		}).valueChanges();
+	}
+}

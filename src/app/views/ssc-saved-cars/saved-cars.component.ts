@@ -2,7 +2,7 @@
  * Form for cars put in individually
  */
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AppState, selectIsSignedIn} from '../../reducers';
+import {AppState, selectIsSignedIn, selectUser} from '../../reducers';
 import {select, Store} from '@ngrx/store';
 import {Subscription} from 'rxjs';
 
@@ -47,7 +47,7 @@ export class SavedCarsComponent implements OnDestroy, OnInit {
 		);
 
 		// TODO: resolver
-		this.subscription.add(this.authService.user.subscribe((user: User) => {
+		this.subscription.add(this.store.pipe(select(selectUser)).subscribe((user: User) => {
 			if (user) {
 				this.store.dispatch(new GetSavedCarDataAction(user));
 			}
