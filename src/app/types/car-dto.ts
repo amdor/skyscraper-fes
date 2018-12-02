@@ -7,6 +7,7 @@ export interface CarData {
 	worth: number;
 	linkName?: string;
 	id?: string;
+	carGroup?: number;
 }
 
 export interface RawCarData {

@@ -1,14 +1,12 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {select, Store} from '@ngrx/store';
-import {Observable, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 
 import {AppState, selectIsSignedIn} from './../../reducers';
 import {CarData} from '../../types/car-dto';
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
 import {SscNotificationService} from '../../services/ssc-notification.service';
-import {NotificationType} from '../ssc-notification/ssc-notification.component';
-import {first, map, take, tap} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import {DocumentChangeAction} from '@angular/fire/firestore/interfaces';
@@ -20,8 +18,7 @@ import {DocumentChangeAction} from '@angular/fire/firestore/interfaces';
 	styleUrls: ['./car-data-table.component.scss']
 })
 export class CarDataTableComponent implements OnDestroy, OnInit {
-	@Input()
-	carData: CarData[] = [];
+	@Input() carData: CarData[] = [];
 	private savedCarData: CarData[];
 	private carDataCollection: AngularFirestoreCollection<CarData>;
 
@@ -33,13 +30,13 @@ export class CarDataTableComponent implements OnDestroy, OnInit {
 				private authService: AngularFireAuth, private afs: AngularFirestore) {
 		this.carDataCollection = this.afs.collection('car_details');
 		this.carDataCollection.snapshotChanges().pipe(
-				map((actions: DocumentChangeAction<CarData>[]) => {
-					return actions.map((action: DocumentChangeAction<CarData>) => {
-						const data = action.payload.doc.data() as CarData;
-						const id = action.payload.doc.id;
-						return {id, ...data};
-					});
-				}))
+			map((actions: DocumentChangeAction<CarData>[]) => {
+				return actions.map((action: DocumentChangeAction<CarData>) => {
+					const data = action.payload.doc.data() as CarData;
+					const id = action.payload.doc.id;
+					return {id, ...data};
+				});
+			}))
 			.subscribe((cars: CarData[]) => {
 				this.savedCarData = cars;
 			});

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {from, Observable, of} from 'rxjs';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {AUTH_SIGN_IN, AUTH_SIGN_OUT, SignInAction, SignInStatusChange} from './../actions';
+import {SIGN_IN, SIGN_OUT, SignInAction, SignInStatusChange} from './../actions';
 import {catchError, map, mergeMap} from 'rxjs/operators';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {SscNotificationService} from '../services/ssc-notification.service';
@@ -12,7 +12,7 @@ import * as firebase from 'firebase/app';
 @Injectable()
 export class AuthEffects {
 	@Effect() signIn$: Observable<SignInStatusChange> = this.actions$.pipe(
-		ofType(AUTH_SIGN_IN),
+		ofType(SIGN_IN),
 		mergeMap((action: SignInAction) => {
 			return from(this.authService.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()))
 				.pipe(
@@ -25,7 +25,7 @@ export class AuthEffects {
 	);
 
 	@Effect() signOut$: Observable<SignInStatusChange | any> = this.actions$.pipe(
-		ofType(AUTH_SIGN_OUT),
+		ofType(SIGN_OUT),
 		map((action: SignInAction) => {
 			return this.authService.auth.signOut();
 		}),

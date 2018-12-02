@@ -1,4 +1,4 @@
-import {AuthActions, USER_LOADED, UserLoadedAction, AUTH_SIGN_IN_STATUS_CHANGED, SignInStatusChange} from '../../actions';
+import {AuthActions, USER_LOADED, UserLoadedAction, SIGN_IN_STATUS_CHANGE, SignInStatusChange} from '../../actions';
 import {User} from 'firebase/auth';
 
 
@@ -22,7 +22,7 @@ export function authReducer(state = initialAuthState, action: AuthActions): Auth
 				user: localAction.user
 			};
 		}
-		case AUTH_SIGN_IN_STATUS_CHANGED: {
+		case SIGN_IN_STATUS_CHANGE: {
 			const localAction = action as SignInStatusChange;
 			return {
 				...state,
