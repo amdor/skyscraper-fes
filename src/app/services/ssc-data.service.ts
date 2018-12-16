@@ -6,6 +6,7 @@ import {from, Observable} from 'rxjs';
 import {CarData} from '../types/car-dto';
 import {map, mergeMap, take} from 'rxjs/operators';
 import {AngularFirestoreCollection} from '@angular/fire/firestore/collection/collection';
+import {SscUser} from '../types/ssc-user-dto';
 
 
 @Injectable()
@@ -30,7 +31,7 @@ export class SscDataService {
 				return {id, ...data};
 			})),
 			take(1),
-			mergeMap((savedCarData: CarData[]) => {
+			mergeMap((savedCarData: any[]) => {
 				// delete all old
 				const batchDelete = this.afs.firestore.batch();
 				for (const savedCar of savedCarData) {
@@ -55,7 +56,7 @@ export class SscDataService {
 		return this.afs.collection(environment.userCollection, (ref: CollectionReference) => {
 			return ref.orderBy('carGroup').limit(1);
 		}).valueChanges().pipe(
-			map((lastCarGroup: number[]) => {
+			map((lastCarGroup: SscUser[]) => {
 				const newCarGroup = lastCarGroup[0].carGroup + 1;
 				this.afs.collection(environment.userCollection).doc(user.uid).set({carGroup: newCarGroup});
 				return newCarGroup;
