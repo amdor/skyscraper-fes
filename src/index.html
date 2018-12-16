@@ -15,23 +15,12 @@
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-signin-client_id" content="498731538493-etubco5p4at0chs18tuqmqmm8g3ngtr1.apps.googleusercontent.com">
   <link rel="icon" type="image/x-icon" href="favicon.png">
-  <script src="https://apis.google.com/js/platform.js"></script>
-  <script>
-      var initialize = function() {
-          if(gapi.client === undefined) {
-              setTimeout(function() {
-                  initialize()
-              }, 100);
-          } else {
-             console.log('gapi initialized');
-          }
-      };
-
-      initialize()
-  </script>
 </head>
 <body>
   <ssc-app-root></ssc-app-root>
 </body>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117801340-1"></script>
 </html>

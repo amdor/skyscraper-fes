@@ -6,3 +6,7 @@
 .dropdown-toggle::after {
   border-top-color: white;
 }
+
+.nav-link, .dropdown-item {
+  cursor: pointer;
+}

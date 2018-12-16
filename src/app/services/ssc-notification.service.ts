@@ -1,19 +1,29 @@
 import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
-import {NotificationType} from '../components/ssc-notification/ssc-notification.component';
+import {TranslateService} from '@ngx-translate/core';
+import {take} from 'rxjs/operators';
+import {NotificationPayload, NotificationType} from '../types/notification';
+
 
 @Injectable()
 export class SscNotificationService {
 
-	private notificationSubject: Subject<NotificationType> = new Subject();
-	private notificationObservable: Observable<NotificationType> = this.notificationSubject.asObservable();
+	private notificationSubject: Subject<NotificationPayload> = new Subject();
+	private notificationObservable: Observable<NotificationPayload> = this.notificationSubject.asObservable();
+
+	constructor(private translateService: TranslateService) {
+	}
 
 	subscribe(success, err?) {
 		return this.notificationObservable.subscribe(success, err);
 	}
 
-	showNotification(newValue: NotificationType) {
-		this.notificationSubject.next(newValue);
+	showNotification(type: NotificationType, msg: string = '') {
+		if (msg) {
+			this.translateService.get(msg).pipe(take(1)).subscribe((translated: string) => {
+				this.notificationSubject.next({type, message: translated});
+			});
+		}
 	}
 
 }

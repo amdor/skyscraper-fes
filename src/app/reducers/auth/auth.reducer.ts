@@ -1,33 +1,32 @@
-import {AuthActions, AUTH_LOADED, AuthLoadedAction, AUTH_SIGN_IN_STATUS_CHANGED, SignInStatusChange} from '../../actions';
+import {AuthActions, USER_LOADED, UserLoadedAction, SIGN_IN_STATUS_CHANGE, SignInStatusChange} from '../../actions';
+import {User} from 'firebase/auth';
 
 
 export interface AuthState {
-	auth2: any;
+	user: User;
 	isSignedIn: boolean;
-	idToken: string;
 }
 
 export const initialAuthState: AuthState = {
-	auth2: {},
-	isSignedIn: false,
-	idToken: ''
+	user: null,
+	isSignedIn: false
 };
 
 export function authReducer(state = initialAuthState, action: AuthActions): AuthState {
 	switch (action.type) {
-		case AUTH_LOADED: {
-			const localAction = action as AuthLoadedAction;
-			const isSignedIn = localAction.auth2.currentUser.get().isSignedIn() || false;
+		case USER_LOADED: {
+			const localAction = action as UserLoadedAction;
 			return {
-				auth2: localAction.auth2 || {},
-				isSignedIn: isSignedIn,
-				idToken: localAction.auth2.currentUser.get().getAuthResponse().id_token
+				...state,
+				isSignedIn: !!localAction.user,
+				user: localAction.user
 			};
 		}
-		case AUTH_SIGN_IN_STATUS_CHANGED: {
+		case SIGN_IN_STATUS_CHANGE: {
 			const localAction = action as SignInStatusChange;
 			return {
 				...state,
+				user: localAction.user || null,
 				isSignedIn: localAction.isSignedIn
 			};
 		}

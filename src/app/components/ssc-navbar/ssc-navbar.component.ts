@@ -1,9 +1,10 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {select, Store} from '@ngrx/store';
-import {AppState, selectAuth2, selectIsSignedIn} from '../../reducers/index';
-import {AuthLoadedAction} from '../../actions/auth.actions';
+import {AppState, selectAuthState} from '../../reducers/index';
+import {SignInAction, SignOutAction} from '../../actions/auth.actions';
 import {SetLanguageAction} from '../../actions/language.actions';
+import {AuthState} from '../../reducers/auth/auth.reducer';
 
 
 @Component({
@@ -13,26 +14,17 @@ import {SetLanguageAction} from '../../actions/language.actions';
 })
 export class SscNavbarComponent implements OnDestroy, OnInit {
 	isCollapsed = true;
-	auth2: any;
-	profile: any;
+	userPhotoUrl: any;
 	isSignedIn = false;
 	subscription: Subscription = new Subscription;
 
-	constructor(private store: Store<AppState>, private cdRef: ChangeDetectorRef) {
+	constructor(private store: Store<AppState>) {
 	}
 
 	ngOnInit() {
-		this.subscription.add(this.store.pipe(select(selectAuth2)).subscribe((auth2) => {
-			if(auth2.currentUser) {
-				this.auth2 = auth2;
-				this.isSignedIn = this.auth2.currentUser.get().isSignedIn();
-				this.profile = this.isSignedIn ? this.auth2.currentUser.get().getBasicProfile() : {};
-				this.cdRef.detectChanges();
-			}
-		}));
-		this.subscription.add(this.store.pipe(select(selectIsSignedIn)).subscribe(isSignedIn => {
-			this.isSignedIn = isSignedIn;
-			this.cdRef.detectChanges();
+		this.subscription.add(this.store.pipe(select(selectAuthState)).subscribe((authState: AuthState) => {
+			this.isSignedIn = authState.isSignedIn;
+			this.userPhotoUrl = this.isSignedIn ? authState.user.photoURL : '';
 		}));
 	}
 
@@ -41,25 +33,11 @@ export class SscNavbarComponent implements OnDestroy, OnInit {
 	}
 
 	login() {
-		const options = {
-			prompt: 'select_account',
-			ux_mode: 'popup'
-		};
-		this.auth2.signIn(options).then(
-			(googleUser) => {
-				this.profile = googleUser.getBasicProfile();
-				this.store.dispatch(new AuthLoadedAction(this.auth2));
-			},
-			(error) => {
-				console.error(error);
-			}
-		);
+		this.store.dispatch(new SignInAction());
 	}
 
 	logout() {
-		this.auth2.signOut().then(() => {
-			this.store.dispatch(new AuthLoadedAction(this.auth2));
-		});
+		this.store.dispatch(new SignOutAction());
 	}
 
 	languageSelectionChanged(newVal: string) {

@@ -27,10 +27,13 @@
                 </div>
             </li>
         </ul>
-        <div class="ml-auto my-2 my-lg-0 mr-1" ngbDropdown placement="bottom-right">
+        <div class="ml-auto my-2 my-lg-0 mr-1 navbar-nav" ngbDropdown placement="bottom-right">
             <a ngbDropdownToggle id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-               aria-expanded="false" class="float-right">
-                <img [src]="isSignedIn ? profile.getImageUrl() : 'favicon.png'" class="rounded-circle">
+               aria-expanded="false" class="float-right nav-link">
+                <img *ngIf="isSignedIn" [src]="userPhotoUrl" class="rounded-circle">
+                <ng-template [ngIf]="!isSignedIn">
+                    {{'Login' | translate}}
+                </ng-template>
             </a>
             <div ngbDropdownMenu aria-labelledby="navbarDropdown">
                 <button *ngIf="isSignedIn"  class="dropdown-item" href="#" (click)="logout()">{{'Logout' | translate}}</button>
