@@ -10,16 +10,16 @@ export {languageReducer} from './language/language.reducer';
 export {CarDataState} from './car-data-table/car-data-table.reducer';
 
 export interface AppState {
-    individualCars: FormState;
-    carData: CarDataState;
-    googleAuth: AuthState;
-    language: string;
+	individualCars: FormState;
+	carData: CarDataState;
+	auth: AuthState;
+	language: string;
 }
 
 
-export const selectAuthState = (state: AppState) => state.googleAuth;
-export const selectAuth2 = createSelector(selectAuthState, (state: AuthState) => state.auth2);
+export const selectAuthState = (state: AppState) => state.auth;
 export const selectIsSignedIn = createSelector(selectAuthState, (state: AuthState) => state.isSignedIn);
+export const selectUser = createSelector(selectAuthState, (state: AuthState) => state.user);
 
 export const selectIndividualCarsState = (state: AppState) => state.individualCars;
 export const selectIndividualCarUrls = createSelector(selectIndividualCarsState, (state: FormState) => state.urls);

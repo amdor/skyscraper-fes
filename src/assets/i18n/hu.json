@@ -23,9 +23,15 @@
   "Save table": "Táblázat mentése",
 
   "Success!!": "Siker!!",
+  "Failure": "Hiba",
+  "Car data saved": "Autó adatok elmentve",
+  "Failed to save car data": "Autó adatok mentése sikertelen",
+  "Failed to get saved car data for user": "Mentett autó adatok betöltése sikertelen",
+  "Failed to get car data for URL": "Autó adatok betöltése sikertelen az URL-hez",
 
   "Saved cars": "Mentett autók",
   "FAQ": "GYIK",
   "Logout": "Kijelentkezés",
-  "Google login": "Google bejelentkezés"
+  "Google login": "Google bejelentkezés",
+  "Login": "Bejelentkezés"
 }

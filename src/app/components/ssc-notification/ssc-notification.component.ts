@@ -1,11 +1,7 @@
 import {ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
 import {SscNotificationService} from '../../services/ssc-notification.service';
 import {Subscription, timer} from 'rxjs';
-
-
-export enum NotificationType {
-	SUCCESS = 'alert-success'
-}
+import {NotificationPayload, NotificationType} from '../../types/notification';
 
 @Component({
 	selector: 'ssc-notification',
@@ -14,12 +10,12 @@ export enum NotificationType {
 })
 export class SscNotificationComponent implements OnDestroy {
 	private subscription: Subscription;
-	displayedNotifications: NotificationType[] = [];
+	displayedNotifications: NotificationPayload[] = [];
 	notificationTypes = NotificationType;
 
 	constructor(private notificationService: SscNotificationService, private cdRef: ChangeDetectorRef) {
-		this.subscription = notificationService.subscribe((type) => {
-			this.popupNotification(type);
+		this.subscription = notificationService.subscribe((notification: NotificationPayload) => {
+			this.popupNotification(notification);
 		});
 	}
 
@@ -27,11 +23,11 @@ export class SscNotificationComponent implements OnDestroy {
 		this.subscription.unsubscribe();
 	}
 
-	private popupNotification(type: NotificationType) {
-		this.displayedNotifications.push(type);
+	private popupNotification(notification: NotificationPayload) {
+		this.displayedNotifications.push(notification);
 		this.cdRef.detectChanges();
 		timer(2000).subscribe(() => {
-			this.displayedNotifications.splice(this.displayedNotifications.indexOf(type), 1);
+			this.displayedNotifications.splice(this.displayedNotifications.indexOf(notification), 1);
 			this.cdRef.detectChanges();
 		});
 	}
