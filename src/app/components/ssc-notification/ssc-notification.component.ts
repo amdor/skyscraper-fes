@@ -1,12 +1,7 @@
 import {ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
-import {NotificationPayload, SscNotificationService} from '../../services/ssc-notification.service';
+import {SscNotificationService} from '../../services/ssc-notification.service';
 import {Subscription, timer} from 'rxjs';
-
-
-export enum NotificationType {
-	SUCCESS = 'alert-success',
-	FAILURE = 'alert-fail'
-}
+import {NotificationPayload, NotificationType} from '../../types/notification';
 
 @Component({
 	selector: 'ssc-notification',

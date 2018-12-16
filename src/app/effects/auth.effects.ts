@@ -5,8 +5,8 @@ import {SIGN_IN, SIGN_OUT, SignInAction, SignInStatusChange} from './../actions'
 import {catchError, map, mergeMap} from 'rxjs/operators';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {SscNotificationService} from '../services/ssc-notification.service';
-import {NotificationType} from '../components/ssc-notification/ssc-notification.component';
 import * as firebase from 'firebase/app';
+import {NotificationType} from '../types/notification';
 
 
 @Injectable()

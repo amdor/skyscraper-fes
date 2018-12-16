@@ -8,23 +8,21 @@ import {
 	CarDataSuccessAction,
 	GET_CAR_DATA,
 	GetCarDataAction,
-	GetCarDataFailedAction,
 	GetCarDataSuccessAction,
-	GetSavedCarDataAction, SaveCarDataAction
+	GetSavedCarDataAction,
+	SaveCarDataAction
 } from './../actions';
 import {environment} from './../../environments/environment';
-import {GET_SAVED_CAR_DATA} from '../actions/car-data.actions';
+import {GET_SAVED_CAR_DATA, SAVE_CAR_DATA} from '../actions/car-data.actions';
 import {catchError, map, mergeMap, take, timeout} from 'rxjs/operators';
 import {CarData} from '../types/car-dto';
 import {SscDataService} from '../services/ssc-data.service';
 import {SscUser} from '../types/ssc-user-dto';
-import {select} from '@ngrx/store';
-import {selectUser} from '../reducers';
 
 
 @Injectable()
 export class CarDataEffects {
-	@Effect() getCarData$: Observable<GetCarDataSuccessAction | GetCarDataFailedAction> = this.actions$.pipe(
+	@Effect() getCarData$: Observable<GetCarDataSuccessAction | CarDataFailAction> = this.actions$.pipe(
 		ofType(GET_CAR_DATA),
 		mergeMap((action: GetCarDataAction) => {
 			return this.http.post(environment.bes, action.rawData).pipe(
@@ -34,11 +32,11 @@ export class CarDataEffects {
 				}),
 				catchError(() => {
 					this.spinnerService.setSpinner(false);
-					return of(new GetCarDataFailedAction());
+					return of(new CarDataFailAction('Failed to get car data for URL'));
 				}));
 		}));
 
-	@Effect() getSavedCarData$: Observable<GetCarDataSuccessAction | GetCarDataFailedAction> = this.actions$.pipe(
+	@Effect() getSavedCarData$: Observable<GetCarDataSuccessAction | CarDataFailAction> = this.actions$.pipe(
 		ofType(GET_SAVED_CAR_DATA),
 		mergeMap((action: GetSavedCarDataAction) => {
 			// get the car group number by user
@@ -53,37 +51,38 @@ export class CarDataEffects {
 							this.spinnerService.setSpinner(false);
 							return new GetCarDataSuccessAction(savedCarData);
 						}),
-						timeout(200)
+						timeout(2000)
 					);
 				}),
 				catchError((err) => {
 					this.spinnerService.setSpinner(false);
-					return of(new GetCarDataFailedAction());
+					return of(new CarDataFailAction('Failed to get saved car data for user'));
 				})
 			);
 		}));
 
-	@Effect() saveCarData: Observable<CarDataSuccessAction | CarDataFailAction> = this.actions$.pipe(
-		ofType(GET_SAVED_CAR_DATA),
+	// create feature group for user if needed
+	// set data
+	@Effect() saveCarData: Observable<any | CarDataFailAction> = this.actions$.pipe(
+		ofType(SAVE_CAR_DATA),
 		mergeMap((action: SaveCarDataAction) => {
-			// delete data for user
 			return this.dataService.getUserCarGroup(action.user).pipe(
 				take(1),
-				// inner observable's emits needed
 				mergeMap((sscUser: SscUser) => {
-					// car detail documents by car group
-					return this.dataService.getSavedCarDataByCarGroup(sscUser.carGroup).pipe(
-						take(1),
-						map((savedCarData: CarData[]) => {
-							this.spinnerService.setSpinner(false);
-							return new GetCarDataSuccessAction(savedCarData);
-						}),
-						timeout(200)
-					);
+					if (!sscUser) {
+						return this.dataService.createNewUserWithCarGroup(action.user);
+					}
+					return of(sscUser.carGroup);
+				}),
+				mergeMap((userCarGroup: number) => {
+					return this.dataService.saveCarDataByCarGroup(userCarGroup, action.carData);
+				}),
+				map((val) => {
+					return new CarDataSuccessAction('Car data saved');
 				}),
 				catchError((err) => {
 					this.spinnerService.setSpinner(false);
-					return of(new CarDataFailAction(''));
+					return of(new CarDataFailAction('Failed to save car data'));
 				})
 			);
 		}));

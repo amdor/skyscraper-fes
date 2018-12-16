@@ -1,13 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
-import {NotificationType} from '../components/ssc-notification/ssc-notification.component';
 import {TranslateService} from '@ngx-translate/core';
 import {take} from 'rxjs/operators';
+import {NotificationPayload, NotificationType} from '../types/notification';
 
-export interface NotificationPayload {
-	type: NotificationType;
-	message: string;
-}
 
 @Injectable()
 export class SscNotificationService {
@@ -23,9 +19,11 @@ export class SscNotificationService {
 	}
 
 	showNotification(type: NotificationType, msg: string = '') {
-		this.translateService.get(msg).pipe(take(1)).subscribe((translated: string) => {
-			this.notificationSubject.next({type, message: translated});
-		});
+		if (msg) {
+			this.translateService.get(msg).pipe(take(1)).subscribe((translated: string) => {
+				this.notificationSubject.next({type, message: translated});
+			});
+		}
 	}
 
 }

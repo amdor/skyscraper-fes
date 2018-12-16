@@ -42,13 +42,6 @@ export class GetCarDataSuccessAction implements Action {
 	}
 }
 
-export class GetCarDataFailedAction implements Action {
-	readonly type = GET_CAR_DATA_FAILED;
-
-	constructor() {
-	}
-}
-
 export class ResetSavedCarDataAction implements Action {
 	readonly type = RESET_SAVED_CAR_DATA;
 
@@ -74,7 +67,6 @@ export type CarDataActions = GetCarDataAction
 	| GetSavedCarDataAction
 	| SaveCarDataAction
 	| GetCarDataSuccessAction
-	| GetCarDataFailedAction
 	| ResetSavedCarDataAction
 	| CarDataSuccessAction
 	| CarDataFailAction;

@@ -14,7 +14,7 @@ export class GoogleAuthResolver implements Resolve<any> {
 	}
 
 	resolve(route: ActivatedRouteSnapshot,
-			state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
+			state: RouterStateSnapshot): void {
 		this.authService.authState.pipe(take(1)).subscribe((user?: User) => {
 			this.store.dispatch(new UserLoadedAction(user));
 		});

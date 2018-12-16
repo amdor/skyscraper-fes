@@ -23,6 +23,10 @@
 
   "Success!!": "Success!!",
   "Failure": "Failure",
+  "Car data saved": "Car data saved",
+  "Failed to save car data": "Failed to save car data",
+  "Failed to get saved car data for user": "Failed to get saved car data for user",
+  "Failed to get car data for URL": "Failed to get car data for URL",
 
   "Saved cars": "Saved cars",
   "FAQ": "FAQ",

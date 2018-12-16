@@ -7,6 +7,7 @@ import {CarData} from '../../types/car-dto';
 import {SaveCarDataAction} from '../../actions';
 import {selectUser} from '../../reducers';
 import {User} from 'firebase';
+import {take} from 'rxjs/operators';
 
 
 @Component({
@@ -35,7 +36,7 @@ export class CarDataTableComponent implements OnDestroy, OnInit {
 	}
 
 	saveCarDetails() {
-		this.store.pipe(select(selectUser)).subscribe((user: User) => {
+		this.store.pipe(select(selectUser), take(1)).subscribe((user: User) => {
 			this.store.dispatch(new SaveCarDataAction(this.carData, user));
 		});
 	}

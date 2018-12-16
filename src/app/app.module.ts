@@ -30,6 +30,8 @@ import {environment} from '../environments/environment';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AuthEffects} from './effects/auth.effects';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {SscDataService} from './services/ssc-data.service';
+import {NotificationEffect} from './effects/notification.effect';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -60,7 +62,7 @@ export function createTranslateLoader(http: HttpClient) {
 			auth: authReducer,
 			language: languageReducer
 		}),
-		EffectsModule.forRoot([CarDataEffects, AuthEffects]),
+		EffectsModule.forRoot([CarDataEffects, AuthEffects, NotificationEffect]),
 		TranslateModule.forRoot({
 			loader: {
 				provide: TranslateLoader,
@@ -76,6 +78,7 @@ export function createTranslateLoader(http: HttpClient) {
 		LocalStorageService,
 		SscNotificationService,
 		SpinnerService,
+		SscDataService,
 		GoogleAuthResolver,
 		{
 			provide: APP_INITIALIZER,
