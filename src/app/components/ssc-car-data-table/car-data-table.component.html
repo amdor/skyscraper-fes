@@ -14,7 +14,8 @@
         <tr *ngFor="let car of carData" class="row">
             <td class="col-md-3">
                 <input type="text" *ngIf="editMode" [(ngModel)]="car.linkName">
-                <a href="{{car.CarUri}}" *ngIf="!editMode"><strong>{{car.linkName|| ('Link name' | translate) }}</strong></a>
+                <a href="{{car.CarUri}}"
+                   *ngIf="!editMode"><strong>{{car.linkName || ('Link name' | translate) }}</strong></a>
                 <i class="fa fa-edit float-right" *ngIf="!editMode" (click)="editMode = !editMode"></i>
                 <i class="fa fa-check-square float-right" *ngIf="editMode" (click)="editMode = !editMode"></i>
             </td>
