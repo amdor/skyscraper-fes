@@ -1,15 +1,16 @@
 {
-  "name": "fes7",
+  "name": "skyscraper_fes7",
   "version": "0.0.2",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
     "build": "ng build",
-    "postinstall": "ng build --configuration=dev",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "pree2e": "webdriver-manager update",
+    "e2e": "ng e2e --webdriverUpdate=false",
+    "start-e2e": "ng serve --configuration=test"
   },
   "private": true,
   "engines": {
@@ -47,22 +48,25 @@
     "zone.js": "0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "0.11.0",
+    "@angular-devkit/build-angular": "0.11.4",
     "@angular/compiler-cli": "7.1.1",
+    "@types/chai": "^4.1.7",
+    "@types/cucumber": "^4.0.4",
     "@types/jasmine": "3.3.0",
     "@types/jasminewd2": "2.0.6",
     "@types/node": "10.12.11",
+    "chai": "^4.2.0",
     "codelyzer": "4.5.0",
+    "cucumber": "^5.1.0",
     "jasmine-core": "3.3.0",
-    "jasmine-spec-reporter": "4.2.1",
     "karma": "3.1.1",
     "karma-chrome-launcher": "2.2.0",
     "karma-coverage-istanbul-reporter": "2.0.4",
     "karma-jasmine": "2.0.1",
     "karma-jasmine-html-reporter": "1.4.0",
-    "protractor": "5.4.1",
-    "ts-node": "7.0.1",
-    "tslint": "5.11.0",
-    "typescript": "3.1.6"
+    "protractor": "^5.4.1",
+    "protractor-cucumber-framework": "^6.1.1",
+    "ts-node": "^7.0.1",
+    "tslint": "5.11.0"
   }
 }

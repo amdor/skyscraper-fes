@@ -17,7 +17,7 @@ import {SscNavbarComponent} from './components/ssc-navbar/ssc-navbar.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {GoogleAuthResolver} from './resolvers';
-import {LocalStorageService} from './services/local-storage.service';
+import {LocalStorageService} from './services/local-storage/local-storage.service';
 import {SavedCarsComponent} from './views/ssc-saved-cars/saved-cars.component';
 import {SscNotificationComponent} from './components/ssc-notification/ssc-notification.component';
 import {SscNotificationService} from './services/ssc-notification.service';
@@ -32,6 +32,7 @@ import {AuthEffects} from './effects/auth.effects';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {SscDataService} from './services/ssc-data.service';
 import {NotificationEffect} from './effects/notification.effect';
+import {HttpClientMock} from '../mocks/http-client.mock.service';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -87,7 +88,8 @@ export function createTranslateLoader(http: HttpClient) {
 			},
 			deps: [LocalStorageService],
 			multi: true
-		}
+		},
+		environment.test ? {provide: HttpClient, useClass: HttpClientMock} : []
 	],
 	bootstrap: [AppComponent]
 })

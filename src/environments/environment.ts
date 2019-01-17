@@ -11,6 +11,7 @@
 
 export const environment = {
 	production: true,
+	test: false,
 	bes: 'https://skyscraper-bes.herokuapp.com/',
 	firebase: {
 		apiKey: 'AIzaSyCDVxquLr4dXKyIq2R8-UfdQIjNdiiKJMo',

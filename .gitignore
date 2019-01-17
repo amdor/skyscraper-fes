@@ -4,3 +4,4 @@ node_modules/
 npm-debug.log.596905768
 .vscode/settings.json
 dist/
+reports

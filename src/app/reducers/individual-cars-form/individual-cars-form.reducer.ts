@@ -1,5 +1,5 @@
 import {CarFormActions, SET, SET_ALL} from './../../actions';
-import {CARS_KEY, LocalStorageService} from '../../services/local-storage.service';
+import {CARS_KEY, LocalStorageService} from '../../services/local-storage/local-storage.service';
 
 const EMPTY_ARR = new Array<string>(10).fill('');
 

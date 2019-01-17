@@ -1,11 +1,37 @@
-import { browser, by, element } from 'protractor';
+import {$, $$, browser, ElementArrayFinder, ElementFinder} from 'protractor';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 export class AppPage {
-  navigateTo() {
-    return browser.get('/');
-  }
+	navigateToMainPage() {
+		return browser.get('/');
+	}
 
-  getParagraphText() {
-    return element(by.css('app-root h1')).getText();
-  }
+	getBrandElement(): ElementFinder {
+		return $('ssc-navbar .navbar-brand');
+	}
+
+	getCarDataTableHeads(): ElementArrayFinder {
+		return $$('ssc-car-data-table table thead th');
+	}
+
+	getCarDataTableRows(): ElementArrayFinder {
+		return $$('ssc-car-data-table table tbody tr');
+	}
+
+	getName(element: ElementFinder) {
+		return element.$('td a strong').getText();
+	}
+
+	getCellsOfRow(element: ElementFinder) {
+		return element.$$('td');
+	}
+
+	typeInNthCarFormField(n: number, text: string) {
+		const field = $$('ssc-individual-cars-form .form input[type=url]').get(n);
+		return field.sendKeys(text);
+	}
+
+	clickTheCompareButton() {
+		return $('ssc-individual-cars-form input[value=Összehasonlítás]').click();
+	}
 }

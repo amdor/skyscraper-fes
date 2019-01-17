@@ -67,15 +67,15 @@ export class IndividualCarsFormComponent implements OnDestroy, OnInit {
 	getCarData() {
 		this.spinnerService.setSpinner(true);
 		const nonEmptyUris = this.uris.filter(uri => uri !== '');
-		defer(async() => {
+		defer(async () => {
 			const rawCarData: RawCarData = {carUrls: [], htmls: {}};
-			for(const uri of nonEmptyUris) {
+			for (const uri of nonEmptyUris) {
 				rawCarData.carUrls.push(uri);
-				if(this.prefetchedHtmls[uri]) {
+				if (this.prefetchedHtmls[uri]) {
 					rawCarData.htmls[uri] = this.prefetchedHtmls[uri];
 				} else {
 					const html = await this.getCarHtml(uri);
-					if(html) {
+					if (html) {
 						rawCarData.htmls[uri] = html;
 					}
 				}
@@ -94,7 +94,7 @@ export class IndividualCarsFormComponent implements OnDestroy, OnInit {
 		return this.http.get(uri, {responseType: 'text'}).toPromise()
 			.catch((err: HttpErrorResponse) => {
 				const requestUrl = (err.error.currentTarget && err.error.currentTarget.__zone_symbol__xhrURL) || err.url || '';
-				if(!requestUrl.includes(this.proxy)) {
+				if (!requestUrl.includes(this.proxy)) {
 					return this.getCarHtml(this.proxy + '/' + requestUrl);
 				}
 				console.error('An error occurred:', err.error);
