@@ -23,7 +23,7 @@
                 {{car.prod_date}}
             </td>
             <td class="col-md-3">
-                {{car.price}}
+                {{car.price | bigCurrency: car.currency:'symbol':'1.0-0':(lang$ | async)}}
             </td>
             <td class="col-md-2">
                 {{car.speedometer}}

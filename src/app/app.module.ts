@@ -33,7 +33,13 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {SscDataService} from './services/ssc-data.service';
 import {NotificationEffect} from './effects/notification.effect';
 import {HttpClientMock} from '../mocks/http-client.mock.service';
+import {BigCurrencyModule} from 'big-currency';
+import { registerLocaleData } from '@angular/common';
+import localeHu from '@angular/common/locales/hu';
+import localeEn from '@angular/common/locales/en';
 
+registerLocaleData(localeEn, 'en');
+registerLocaleData(localeHu, 'hu');
 
 export function createTranslateLoader(http: HttpClient) {
 	return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -51,6 +57,7 @@ export function createTranslateLoader(http: HttpClient) {
 		SscNotificationComponent
 	],
 	imports: [
+		BigCurrencyModule,
 		BrowserModule,
 		BrowserAnimationsModule,
 		FormsModule,

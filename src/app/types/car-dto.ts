@@ -3,6 +3,7 @@ export interface CarData {
 	prod_date: string;
 	power: string;
 	price: string;
+	currency: string;
 	speedometer: string;
 	worth: number;
 	linkName?: string;
