@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {select, Store} from '@ngrx/store';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 
 import {AppState, selectIsSignedIn} from './../../reducers';
 import {CarData} from '../../types/car-dto';
@@ -21,6 +21,7 @@ export class CarDataTableComponent implements OnDestroy, OnInit {
 	subscription = new Subscription();
 	editMode = false;
 	isSignedIn = false;
+	lang$!: Observable<string>;
 
 	constructor(private store: Store<AppState>) {
 	}
@@ -29,6 +30,7 @@ export class CarDataTableComponent implements OnDestroy, OnInit {
 		this.subscription.add(this.store.pipe(select(selectIsSignedIn)).subscribe((isSignedIn: boolean) => {
 			this.isSignedIn = isSignedIn;
 		}));
+		this.lang$ = this.store.pipe(select((state: AppState) => state.language));
 	}
 
 	ngOnDestroy(): void {

@@ -19,7 +19,6 @@ import {CarData} from '../types/car-dto';
 import {SscDataService} from '../services/ssc-data.service';
 import {SscUser} from '../types/ssc-user-dto';
 
-
 @Injectable()
 export class CarDataEffects {
 	@Effect() getCarData$: Observable<GetCarDataSuccessAction | CarDataFailAction> = this.actions$.pipe(

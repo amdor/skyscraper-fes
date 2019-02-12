@@ -36,6 +36,7 @@
     "@ngrx/store": "^6.1.2",
     "@ngx-translate/core": "11.0.1",
     "@ngx-translate/http-loader": "4.0.0",
+    "big-currency": "0.0.3",
     "bootstrap": "4.1.3",
     "core-js": "2.5.7",
     "express": "4.16.4",
