@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {SpinnerService} from './../services/spinner.service';
+import {SpinnerService} from '../services/spinner.service';
 import {
 	CarDataFailAction,
 	CarDataSuccessAction,
@@ -11,9 +11,9 @@ import {
 	GetCarDataSuccessAction,
 	GetSavedCarDataAction,
 	SaveCarDataAction
-} from './../actions';
-import {environment} from './../../environments/environment';
-import {GET_SAVED_CAR_DATA, SAVE_CAR_DATA} from '../actions/car-data.actions';
+} from '../actions';
+import {environment} from '../../environments/environment';
+import {GET_SAVED_CAR_DATA, SAVE_CAR_DATA} from '../actions';
 import {catchError, map, mergeMap, take, timeout} from 'rxjs/operators';
 import {CarData} from '../types/car-dto';
 import {SscDataService} from '../services/ssc-data.service';
