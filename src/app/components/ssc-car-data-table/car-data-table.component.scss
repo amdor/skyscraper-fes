@@ -1,3 +1,9 @@
 div.container-fluid {
   margin-bottom: 10rem;
 }
+
+tbody td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

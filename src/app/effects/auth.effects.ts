@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {from, Observable, of} from 'rxjs';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {SIGN_IN, SIGN_OUT, SignInAction, SignInStatusChange} from './../actions';
+import {SIGN_IN, SIGN_OUT, SignInAction, SignInStatusChange, SignOutAction} from './../actions';
 import {catchError, map, mergeMap} from 'rxjs/operators';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {SscNotificationService} from '../services/ssc-notification.service';
@@ -26,7 +26,7 @@ export class AuthEffects {
 
 	@Effect() signOut$: Observable<SignInStatusChange | any> = this.actions$.pipe(
 		ofType(SIGN_OUT),
-		map((action: SignInAction) => {
+		map((action: SignOutAction) => {
 			return this.authService.auth.signOut();
 		}),
 		map(() => new SignInStatusChange(null, false)),

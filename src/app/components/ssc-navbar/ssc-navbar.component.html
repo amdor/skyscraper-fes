@@ -9,15 +9,17 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isCollapsed">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item" *ngIf="isSignedIn">
-                <a class="nav-link border-light" routerLink="/saved" routerLinkActive="active">{{'Saved cars' | translate}}</a>
+                <a class="nav-link border-light" routerLink="/saved" routerLinkActive="active"
+                   (click)="isCollapsed = !isCollapsed">{{'Saved cars' | translate}}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link border-light" routerLink="/faq" routerLinkActive="active">{{'FAQ' | translate}}</a>
+                <a class="nav-link border-light" routerLink="/faq" routerLinkActive="active"
+                   (click)="isCollapsed = !isCollapsed">{{'FAQ' | translate}}</a>
             </li>
             <li class="nav-item">
                 <div ngbDropdown placement="bottom-left">
                     <a ngbDropdownToggle id="languageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false" class="btn nav-link">
+                       aria-expanded="false" class="nav-link">
                         <i class="fa fa-globe"></i>
                     </a>
                     <div ngbDropdownMenu aria-labelledby="languageDropdown">
@@ -36,8 +38,10 @@
                 </ng-template>
             </a>
             <div ngbDropdownMenu aria-labelledby="navbarDropdown">
-                <button *ngIf="isSignedIn"  class="dropdown-item" href="#" (click)="logout()">{{'Logout' | translate}}</button>
-                <button *ngIf="!isSignedIn"  class="dropdown-item" href="#" (click)="login()">{{'Google login' | translate}} </button>
+                <button *ngIf="isSignedIn" class="dropdown-item" href="#"
+                        (click)="logout()">{{'Logout' | translate}}</button>
+                <button *ngIf="!isSignedIn" class="dropdown-item" href="#"
+                        (click)="login()">{{'Google login' | translate}} </button>
             </div>
         </div>
     </div>
