@@ -2,7 +2,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {Observable, Subscription} from 'rxjs';
 
-import {AppState, selectIsSignedIn} from './../../reducers';
+import {AppState, selectIsSignedIn} from '../../reducers';
 import {CarData} from '../../types/car-dto';
 import {SaveCarDataAction} from '../../actions';
 import {selectUser} from '../../reducers';
