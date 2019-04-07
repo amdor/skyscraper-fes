@@ -25,9 +25,9 @@ export class SscDataService {
 	public saveCarDataByCarGroup(carGroup: number, carData: CarData[]): Observable<void> {
 		return this.getSavedCarDataCollection(carGroup).snapshotChanges().pipe(
 			// collect ids
-			map(actions => actions.map(a => {
-				const data = a.payload.doc.data();
-				const id = a.payload.doc.id;
+			map(actions => actions.map(action => {
+				const data = action.payload.doc.data();
+				const id = action.payload.doc.id;
 				return {id, ...data};
 			})),
 			take(1),
@@ -56,8 +56,8 @@ export class SscDataService {
 		return this.afs.collection(environment.userCollection, (ref: CollectionReference) => {
 			return ref.orderBy('carGroup').limit(1);
 		}).valueChanges().pipe(
-			map((lastCarGroup: SscUser[]) => {
-				const newCarGroup = lastCarGroup[0].carGroup + 1;
+			map((lastUser: SscUser[]) => {
+				const newCarGroup = lastUser[0].carGroup + 1;
 				this.afs.collection(environment.userCollection).doc(user.uid).set({carGroup: newCarGroup});
 				return newCarGroup;
 			})
