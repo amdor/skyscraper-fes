@@ -1,5 +1,4 @@
 import {$, $$, browser, ElementArrayFinder, ElementFinder} from 'protractor';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 export class AppPage {
 	navigateToMainPage() {

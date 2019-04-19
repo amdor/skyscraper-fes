@@ -1,11 +1,7 @@
 import {Given, Then, When} from 'cucumber';
 import {AppPage} from '../../app.po';
 import {expect} from 'chai';
-import {HttpClientMock} from '../../../src/mocks/http-client.mock.service';
-import {map, mapTo, mergeMap, take, tap} from 'rxjs/operators';
-import {browser, ElementArrayFinder, ElementFinder} from 'protractor';
-import {from, of, range} from 'rxjs';
-import {fromPromise} from 'rxjs/internal-compatibility';
+import {browser} from 'protractor';
 
 const page = new AppPage();
 
