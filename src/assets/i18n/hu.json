@@ -1,4 +1,7 @@
 {
+  "PAGE_TITLE": "Skyscraper: bármilyen autókat összehasonlító alkalmazás",
+  "PAGE_DESCRIPTION": "Másolj be bármilyen URL-t amin autó adatok vannak, és hasonlítsd őket össze egy helyen",
+
   "How does it work?": "Hogyan működik?",
   "faq_comp_how_does_it_work_answer": "Az Interneten bárhol talált autó adatlapokat lehet itt összegyűjteni és összehasonlítani. Csak annyi kell hogy a kiválasztott autók URL-jét bemásold az egyik főoldalon lévő mezőbe. Ha megvan az összes autó amit szeretnél összehasonlítani, kattints az összehasonlítás gombra.",
   "Is it safe to log in?": "Biztonságos bejelentkezni?",

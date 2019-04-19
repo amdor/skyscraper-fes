@@ -4,7 +4,7 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {AppState, selectIndividualCarHtmls, selectIndividualCarUrls} from '../../reducers';
 import {select, Store} from '@ngrx/store';
-import {combineLatest, defer, Subscription} from 'rxjs';
+import {combineLatest, defer, Observable, Subscription} from 'rxjs';
 import {GetCarDataAction, SetAction} from '../../actions';
 import {SpinnerService} from '../../services/spinner.service';
 
@@ -29,8 +29,11 @@ export class IndividualCarsFormComponent implements OnDestroy, OnInit {
 
 	constructor(private store: Store<AppState>, private spinnerService: SpinnerService, private http: HttpClient,
 				private cdRef: ChangeDetectorRef) {
+	}
+
+	ngOnInit() {
 		this.subscription.add(
-			combineLatest(store.pipe(select(selectIndividualCarUrls)), store.pipe(select(selectIndividualCarHtmls)))
+			combineLatest<string[], any>(this.store.pipe(select(selectIndividualCarUrls)), this.store.pipe(select(selectIndividualCarHtmls)))
 				.subscribe(([urls, prefetchedHtmls]) => {
 					this.uris = urls;
 					this.prefetchedHtmls = prefetchedHtmls;
@@ -38,13 +41,11 @@ export class IndividualCarsFormComponent implements OnDestroy, OnInit {
 		);
 
 		this.subscription.add(
-			spinnerService.subscribe(waiting => {
+			this.spinnerService.subscribe(waiting => {
 				this.spinner = waiting;
 			})
 		);
-	}
 
-	ngOnInit() {
 		this.subscription.add(this.store.pipe(select(state => state.carData)).subscribe((carDataState) => {
 			this.carData = carDataState.cars.sort((car1, car2) => car2.worth - car1.worth);
 			this.cdRef.detectChanges();

@@ -1,4 +1,7 @@
 {
+  "PAGE_TITLE": "Skyscraper: awesome car comparison tool for any website",
+  "PAGE_DESCRIPTION": "Paste in any website URL with car details, and see all data in one place",
+
   "How does it work?": "How does it work?",
   "faq_comp_plugin_answer": "With this Google Chrome plugin, it is easier and faster to collect cars of liking. The extension is available in Google store.",
   "faq_comp_how_does_it_work_answer": "Collect and compare any cars found on the Internet. The only thing you need to do is pasting the URLs of the cars of preference into the main page's fields.",

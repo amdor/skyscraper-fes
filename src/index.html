@@ -1,26 +1,30 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117801340-1"></script>
-   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'UA-117801340-1');
-  </script>
   <meta charset="utf-8">
-  <title>Skyscraper</title>
+  <title>{{'PAGE_TITLE' | translate}}</title>
+  <meta name="Description" content="{{'PAGE_DESCRIPTION' | translate}}">
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="google-signin-client_id" content="498731538493-etubco5p4at0chs18tuqmqmm8g3ngtr1.apps.googleusercontent.com">
+  <meta name="google-signin-client_id"
+        content="498731538493-etubco5p4at0chs18tuqmqmm8g3ngtr1.apps.googleusercontent.com">
   <link rel="icon" type="image/x-icon" href="favicon.png">
 </head>
 <body>
-  <ssc-app-root></ssc-app-root>
+<ssc-app-root></ssc-app-root>
 </body>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117801340-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+
+  gtag('js', new Date());
+
+  gtag('config', 'UA-117801340-1');
+</script>
 </html>
