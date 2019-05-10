@@ -6,15 +6,15 @@ export class AppPage {
 	}
 
 	getBrandElement(): ElementFinder {
-		return $('ssc-navbar .navbar-brand');
+		return $('navbar .navbar-brand');
 	}
 
 	getCarDataTableHeads(): ElementArrayFinder {
-		return $$('ssc-car-data-table table thead th');
+		return $$('car-data-table table thead th');
 	}
 
 	getCarDataTableRows(): ElementArrayFinder {
-		return $$('ssc-car-data-table table tbody tr');
+		return $$('car-data-table table tbody tr');
 	}
 
 	getName(element: ElementFinder) {
@@ -26,11 +26,11 @@ export class AppPage {
 	}
 
 	typeInNthCarFormField(n: number, text: string) {
-		const field = $$('ssc-individual-cars-form .form input[type=url]').get(n);
+		const field = $$('individual-cars-form .form input[type=url]').get(n);
 		return field.sendKeys(text);
 	}
 
 	clickTheCompareButton() {
-		return $('ssc-individual-cars-form input[value=Összehasonlítás]').click();
+		return $('individual-cars-form input[value=Összehasonlítás]').click();
 	}
 }

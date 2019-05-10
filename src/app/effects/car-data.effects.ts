@@ -16,8 +16,8 @@ import {environment} from '../../environments/environment';
 import {GET_SAVED_CAR_DATA, SAVE_CAR_DATA} from '../actions';
 import {catchError, map, mergeMap, take, timeout} from 'rxjs/operators';
 import {CarData} from '../types/car-dto';
-import {SscDataService} from '../services/ssc-data.service';
-import {SscUser} from '../types/ssc-user-dto';
+import {DataService} from '../services/data.service';
+import {SscUser} from '../types/user-dto';
 
 @Injectable()
 export class CarDataEffects {
@@ -89,6 +89,6 @@ export class CarDataEffects {
 	constructor(private http: HttpClient,
 				private actions$: Actions,
 				private spinnerService: SpinnerService,
-				private dataService: SscDataService) {
+				private dataService: DataService) {
 	}
 }

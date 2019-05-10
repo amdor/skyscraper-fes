@@ -2,7 +2,7 @@ import {Actions, Effect, ofType} from '@ngrx/effects';
 import {tap} from 'rxjs/operators';
 import {CAR_DATA_FAIL, CAR_DATA_SUCCESS, CarDataFailAction, CarDataSuccessAction} from '../actions';
 import {Injectable} from '@angular/core';
-import {SscNotificationService} from '../services/ssc-notification.service';
+import {NotificationService} from '../services/notification.service';
 import {NotificationType} from '../types/notification';
 
 @Injectable()
@@ -19,7 +19,7 @@ export class NotificationEffect {
 			this.notificationService.showNotification(NotificationType.FAILURE, action.msg);
 		}));
 
-	constructor(private actions$: Actions, private notificationService: SscNotificationService) {
+	constructor(private actions$: Actions, private notificationService: NotificationService) {
 
 	}
 }

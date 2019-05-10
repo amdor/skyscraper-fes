@@ -8,21 +8,21 @@ import {RouterModule} from '@angular/router';
 
 import {ROUTES} from './app.routes';
 import {AppComponent} from './app.component';
-import {CarDataTableComponent} from './components/ssc-car-data-table/car-data-table.component';
-import {IndividualCarsFormComponent} from './views/ssc-individual-cars-form/individual-cars-form.component';
+import {CarDataTableComponent} from './components/car-data-table/car-data-table.component';
+import {IndividualCarsFormComponent} from './views/individual-cars-form/individual-cars-form.component';
 import {authReducer, carDataTableReducer, individualCarsFormReducer, languageReducer} from './reducers';
 import {CarDataEffects} from './effects/car-data.effects';
 import {SpinnerService} from './services/spinner.service';
-import {SscNavbarComponent} from './components/ssc-navbar/ssc-navbar.component';
+import {NavbarComponent} from './components/navbar/navbar.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {GoogleAuthResolver} from './resolvers';
 import {LocalStorageService} from './services/local-storage/local-storage.service';
-import {SavedCarsComponent} from './views/ssc-saved-cars/saved-cars.component';
-import {SscNotificationComponent} from './components/ssc-notification/ssc-notification.component';
-import {SscNotificationService} from './services/ssc-notification.service';
-import {FaqComponent} from './views/ssc-faq/faq.component';
-import {MainComponent} from './views/ssc-main/main.component';
+import {SavedCarsComponent} from './views/saved-cars/saved-cars.component';
+import {NotificationComponent} from './components/notification/notification.component';
+import {NotificationService} from './services/notification.service';
+import {FaqComponent} from './views/faq/faq.component';
+import {MainComponent} from './views/main/main.component';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {AngularFireModule} from '@angular/fire';
@@ -30,7 +30,7 @@ import {environment} from '../environments/environment';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AuthEffects} from './effects/auth.effects';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
-import {SscDataService} from './services/ssc-data.service';
+import {DataService} from './services/data.service';
 import {NotificationEffect} from './effects/notification.effect';
 import {HttpClientMock} from '../mocks/http-client.mock.service';
 import {BigNumberCurrencyModule} from 'bignumber-currency';
@@ -53,8 +53,8 @@ export function createTranslateLoader(http: HttpClient) {
 		IndividualCarsFormComponent,
 		MainComponent,
 		SavedCarsComponent,
-		SscNavbarComponent,
-		SscNotificationComponent
+		NavbarComponent,
+		NotificationComponent
 	],
 	imports: [
 		BigNumberCurrencyModule,
@@ -84,9 +84,9 @@ export function createTranslateLoader(http: HttpClient) {
 	],
 	providers: [
 		LocalStorageService,
-		SscNotificationService,
+		NotificationService,
 		SpinnerService,
-		SscDataService,
+		DataService,
 		GoogleAuthResolver,
 		{
 			provide: APP_INITIALIZER,

@@ -6,11 +6,11 @@ import {from, Observable} from 'rxjs';
 import {CarData} from '../types/car-dto';
 import {map, mergeMap, take} from 'rxjs/operators';
 import {AngularFirestoreCollection} from '@angular/fire/firestore/collection/collection';
-import {SscUser} from '../types/ssc-user-dto';
+import {SscUser} from '../types/user-dto';
 
 
 @Injectable()
-export class SscDataService {
+export class DataService {
 	constructor(private afs: AngularFirestore) {
 	}
 

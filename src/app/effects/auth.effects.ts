@@ -4,7 +4,7 @@ import {Actions, Effect, ofType} from '@ngrx/effects';
 import {SIGN_IN, SIGN_OUT, SignInAction, SignInStatusChange, SignOutAction} from './../actions';
 import {catchError, map, mergeMap} from 'rxjs/operators';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {SscNotificationService} from '../services/ssc-notification.service';
+import {NotificationService} from '../services/notification.service';
 import * as firebase from 'firebase/app';
 import {NotificationType} from '../types/notification';
 
@@ -36,6 +36,6 @@ export class AuthEffects {
 		})
 	);
 
-	constructor(private actions$: Actions, private authService: AngularFireAuth, private notificationService: SscNotificationService) {
+	constructor(private actions$: Actions, private authService: AngularFireAuth, private notificationService: NotificationService) {
 	}
 }

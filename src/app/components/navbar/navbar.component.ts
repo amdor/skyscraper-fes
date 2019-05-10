@@ -9,11 +9,11 @@ import {AuthState} from '../../reducers/auth/auth.reducer';
 
 @Component({
 	selector: 'ssc-navbar',
-	templateUrl: './ssc-navbar.component.html',
-	styleUrls: ['./ssc-navbar.component.scss'],
+	templateUrl: './navbar.component.html',
+	styleUrls: ['./navbar.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SscNavbarComponent implements OnDestroy, OnInit {
+export class NavbarComponent implements OnDestroy, OnInit {
 	isCollapsed = true;
 	userPhotoUrl: any;
 	isSignedIn = false;

@@ -6,7 +6,7 @@ import {NotificationPayload, NotificationType} from '../types/notification';
 
 
 @Injectable()
-export class SscNotificationService {
+export class NotificationService {
 
 	private notificationSubject: Subject<NotificationPayload> = new Subject();
 	private notificationObservable: Observable<NotificationPayload> = this.notificationSubject.asObservable();

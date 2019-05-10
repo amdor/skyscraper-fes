@@ -1,9 +1,9 @@
 import {Routes} from '@angular/router';
-import {IndividualCarsFormComponent} from './views/ssc-individual-cars-form/individual-cars-form.component';
+import {IndividualCarsFormComponent} from './views/individual-cars-form/individual-cars-form.component';
 import {GoogleAuthResolver} from './resolvers';
-import {SavedCarsComponent} from './views/ssc-saved-cars/saved-cars.component';
-import {MainComponent} from './views/ssc-main/main.component';
-import {FaqComponent} from './views/ssc-faq/faq.component';
+import {SavedCarsComponent} from './views/saved-cars/saved-cars.component';
+import {MainComponent} from './views/main/main.component';
+import {FaqComponent} from './views/faq/faq.component';
 
 export const ROUTES: Routes = [
 	{

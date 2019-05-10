@@ -10,3 +10,7 @@
 .nav-link, .dropdown-item {
   cursor: pointer;
 }
+
+.navbar-collapse.show {
+  display: flex;
+}
