@@ -1,19 +1,19 @@
 import {ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
-import {SscNotificationService} from '../../services/ssc-notification.service';
+import {NotificationService} from '../../services/notification.service';
 import {Subscription, timer} from 'rxjs';
 import {NotificationPayload, NotificationType} from '../../types/notification';
 
 @Component({
 	selector: 'ssc-notification',
-	templateUrl: './ssc-notification.component.html',
-	styleUrls: ['./ssc-notification.component.scss']
+	templateUrl: './notification.component.html',
+	styleUrls: ['./notification.component.scss']
 })
-export class SscNotificationComponent implements OnDestroy {
+export class NotificationComponent implements OnDestroy {
 	private subscription: Subscription;
 	displayedNotifications: NotificationPayload[] = [];
 	notificationTypes = NotificationType;
 
-	constructor(private notificationService: SscNotificationService, private cdRef: ChangeDetectorRef) {
+	constructor(private notificationService: NotificationService, private cdRef: ChangeDetectorRef) {
 		this.subscription = notificationService.subscribe((notification: NotificationPayload) => {
 			this.popupNotification(notification);
 		});
