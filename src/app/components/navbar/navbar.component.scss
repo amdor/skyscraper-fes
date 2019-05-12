@@ -1,16 +1,83 @@
-#navbarDropdown > img {
-  height: 3rem;
-  width: 3rem;
+@import '../../../assets/variables';
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+@import '~bootstrap/scss/mixins/_breakpoints';
+
+$ssc-nav-bg: #495057;
+$navbar-height: 70px;
+
+@include media-breakpoint-up(md) {
+  .ssc-navbar {
+    display: flex;
+  }
+
+  .ssc-navbar-item-container {
+    justify-content: space-between;
+  }
+
+  .ssc-navbar__section {
+    display: flex;
+    flex-grow: 1;
+    &.ssc-navbar-collapsible-section {
+      flex-grow: 3;
+    }
+  }
+
+  .ssc-navbar__brand {
+  }
+  .ssc-navbar__section--middle {
+    flex-grow: 2;
+    justify-content: space-evenly;
+
+    .ssc-navbar__item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .ssc-navbar__item::after {
+      display: block;
+      content: '';
+      width: 0;
+      height: 5px;
+      background-color: $highlight-color;
+      transition: all ease-in-out .2s;
+    }
+
+    .ssc-navbar__item.active::after, .ssc-navbar__item:hover::after {
+      width: 100%;
+      left: 0;
+    }
+  }
+
+  .ssc-navbar__section--last {
+    justify-content: flex-end;
+  }
+
+  .navbar-toggler {
+    display: none;
+  }
 }
 
-.dropdown-toggle::after {
-  border-top-color: white;
+//mobile view
+@include media-breakpoint-down(sm) {
+  .ssc-navbar-item-container {
+    background: $slight-highlight-color;
+  }
+  .ssc-navbar-collapsible-section {
+    display: none;
+  }
 }
 
-.nav-link, .dropdown-item {
-  cursor: pointer;
+.ssc-navbar a, a:hover {
+  color: $highlight-color;
+  text-decoration: none;
 }
 
-.navbar-collapse.show {
+.ssc-navbar-item-container {
+  align-items: center;
   display: flex;
+  flex-grow: 1;
+  height: $navbar-height;
 }

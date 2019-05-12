@@ -1,48 +1,25 @@
-<!--Navbar-->
-<nav class="navbar sticky-top navbar-dark bg-dark navbar-expand-md mx-3 my-4 rounded">
-    <a class="navbar-brand" routerLink="/" routerLinkActive="active">Skyscraper</a>
-    <button type="button" class="navbar-toggler" data-toggle="collapse"
-            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-            [attr.aria-expanded]="!isCollapsed" (click)="isCollapsed = !isCollapsed">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isCollapsed">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item" *ngIf="isSignedIn">
-                <a class="nav-link border-light" routerLink="/saved" routerLinkActive="active"
-                   (click)="isCollapsed = !isCollapsed">{{'Saved cars' | translate}}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link border-light" routerLink="/faq" routerLinkActive="active"
-                   (click)="isCollapsed = !isCollapsed">{{'FAQ' | translate}}</a>
-            </li>
-            <li class="nav-item">
-                <div ngbDropdown placement="bottom-left">
-                    <a ngbDropdownToggle id="languageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false" class="nav-link">
-                        <i class="fa fa-globe"></i>
-                    </a>
-                    <div ngbDropdownMenu aria-labelledby="languageDropdown">
-                        <button class="dropdown-item" (click)="languageSelectionChanged('hu')">hu</button>
-                        <button class="dropdown-item" (click)="languageSelectionChanged('en')">en</button>
-                    </div>
+<nav class="ssc-navbar mx-5">
+    <div class="ssc-navbar-item-container mb-2">
+        <div class="ssc-navbar__section">
+            <a class=" ssc-navbar__brand" routerLink="/" routerLinkActive="active">Skyscraper</a>
+        </div>
+        <div class="ssc-navbar-collapsible-section ssc-navbar__section">
+            <div class="ssc-navbar__section ssc-navbar__section--middle">
+                <div class="ssc-navbar__item" routerLinkActive="active">
+                    <a routerLink="/saved">{{'Saved cars' | translate}}</a>
                 </div>
-            </li>
-        </ul>
-        <div class="ml-auto my-2 my-lg-0 mr-1 navbar-nav" ngbDropdown placement="bottom-right">
-            <a ngbDropdownToggle id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-               aria-expanded="false" class="float-right nav-link">
-                <img *ngIf="isSignedIn" [src]="userPhotoUrl" class="rounded-circle">
-                <ng-template [ngIf]="!isSignedIn">
-                    {{'Login' | translate}}
-                </ng-template>
-            </a>
-            <div ngbDropdownMenu aria-labelledby="navbarDropdown">
-                <button *ngIf="isSignedIn" class="dropdown-item" href="#"
-                        (click)="logout()">{{'Logout' | translate}}</button>
-                <button *ngIf="!isSignedIn" class="dropdown-item" href="#"
-                        (click)="login()">{{'Google login' | translate}} </button>
+                <div class="ssc-navbar__item" routerLinkActive="active">
+                    <a routerLink="/faq">{{'FAQ' | translate}}</a>
+                </div>
+            </div>
+            <div class="ssc-navbar__section ssc-navbar__section--last">
+                <a class="">login</a>
             </div>
         </div>
+        <button type="button" class="navbar-toggler" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                [attr.aria-expanded]="!isCollapsed" (click)="isCollapsed = !isCollapsed">
+            <span class="navbar-toggler-icon"></span>
+        </button>
     </div>
 </nav>

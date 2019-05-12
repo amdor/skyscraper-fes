@@ -1,0 +1,30 @@
+@import './assets/variables.scss';
+
+html > body {
+  background-color: $background-color;
+  color: $main-text-color;
+
+  #inputContainerID {
+    padding-top: 10px;
+  }
+}
+
+button, a.btn, button.btn, input.btn {
+  background: $highlight-color;
+  border-radius: 1.2rem;
+  color: #fff;
+
+  &:hover {
+    background: $highlighted-text-color;
+    color: #fff;
+  }
+
+  &:focus {
+    background: $slight-highlight-color;
+    color: #fff;
+  }
+}
+
+i.fa {
+  color: $slight-highlight-color;
+}
