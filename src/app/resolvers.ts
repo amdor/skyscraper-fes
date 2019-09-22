@@ -1,12 +1,11 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
-import {Observable} from 'rxjs';
 import {AppState} from './reducers/index';
 import {Store} from '@ngrx/store';
 import {UserLoadedAction} from './actions';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {take} from 'rxjs/operators';
-import {User} from 'firebase/auth';
+import {User} from 'firebase';
 
 @Injectable()
 export class GoogleAuthResolver implements Resolve<any> {

@@ -1,5 +1,5 @@
 import {Action} from '@ngrx/store';
-import {User} from 'firebase/auth';
+import {User} from 'firebase';
 
 export const USER_LOADED = '[Auth] User loaded';
 export const SIGN_IN_STATUS_CHANGE = '[Auth] Sign in status changed';

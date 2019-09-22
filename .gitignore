@@ -5,3 +5,4 @@ npm-debug.log.596905768
 .vscode/settings.json
 dist/
 reports
+package-lock.json
