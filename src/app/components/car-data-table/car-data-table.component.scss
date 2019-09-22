@@ -1,9 +1,26 @@
+@import '../../../assets/variables.scss';
+
 div.container-fluid {
   margin-bottom: 10rem;
+}
+
+table tr {
+  margin: 0;
 }
 
 tbody td {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+
+i.fa-edit,
+i.fa-check-square {
+  background: $highlight-color;
+
+  &:hover {
+    background: $highlighted-text-color;
+    color: #fff;
+  }
 }

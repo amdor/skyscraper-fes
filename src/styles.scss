@@ -9,7 +9,10 @@ html > body {
   }
 }
 
-button, a.btn, button.btn, input.btn {
+button,
+a.btn,
+button.btn,
+input.btn {
   background: $highlight-color;
   border-radius: 1.2rem;
   color: #fff;
