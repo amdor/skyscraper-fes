@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {APP_INITIALIZER, NgModule} from '@angular/core';
+import {APP_INITIALIZER, LOCALE_ID, NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {StoreModule} from '@ngrx/store';
@@ -33,7 +33,6 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {DataService} from './services/data.service';
 import {NotificationEffect} from './effects/notification.effect';
 import {HttpClientMock} from '../mocks/http-client.mock.service';
-import {BigNumberCurrencyModule} from 'bignumber-currency';
 import { registerLocaleData } from '@angular/common';
 import localeHu from '@angular/common/locales/hu';
 import localeEn from '@angular/common/locales/en';
@@ -57,7 +56,6 @@ export function createTranslateLoader(http: HttpClient) {
 		NotificationComponent
 	],
 	imports: [
-		BigNumberCurrencyModule,
 		BrowserModule,
 		BrowserAnimationsModule,
 		FormsModule,

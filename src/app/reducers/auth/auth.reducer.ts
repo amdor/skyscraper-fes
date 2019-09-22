@@ -1,5 +1,5 @@
 import {AuthActions, USER_LOADED, UserLoadedAction, SIGN_IN_STATUS_CHANGE, SignInStatusChange} from '../../actions';
-import {User} from 'firebase/auth';
+import {User} from 'firebase';
 
 
 export interface AuthState {
